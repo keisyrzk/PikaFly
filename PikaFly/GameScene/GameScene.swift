@@ -2,6 +2,7 @@ import SpriteKit
 
 class GameScene: SKScene {
     
+    let pikachu = SKSpriteNode(imageNamed: "pikachuImage")
     var cam:SKCameraNode!
     
     override func didMove(to view: SKView) {
@@ -30,7 +31,6 @@ class GameScene: SKScene {
     
     private func setupPikachu() {
         
-        let pikachu = SKSpriteNode(imageNamed: "pikachuImage")
         pikachu.size = CGSize(width: 50, height: 70)
         pikachu.zRotation = getRadians(from: 30)
         pikachu.position = CGPoint(x: 50, y: 200)

@@ -103,7 +103,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func generateObstacles(number: Int) {
         
         for _ in 0 ..< number {
-            let obstacle = Obstacle(obstacleType: .Bed)
+            let obstacle = Obstacle(obstacleType: .Slowpoke)
             obstacles.append(obstacle)
         }
         

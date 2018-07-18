@@ -9,11 +9,11 @@
 import SpriteKit
 
 enum ObstacleType: Int {
-    case Bed
+    case Slowpoke
     
     var spriteName: String {
         let spriteNames = [
-            "bed"]
+            "slowpoke"]
         
         return spriteNames[rawValue]
     }
@@ -49,11 +49,15 @@ class Obstacle: CustomStringConvertible, Hashable {
         
         switch obstacleType {
             
-        case .Bed:
-            let newSprite = SKSpriteNode(imageNamed: "bed")
-            newSprite.size = CGSize(width: 50, height: 50)
-            newSprite.physicsBody = SKPhysicsBody(rectangleOf: newSprite.size)
-            newSprite.position = CGPoint(x: 200, y: 0)
+        case .Slowpoke:
+            let newSprite = SKSpriteNode(imageNamed: "slowpokeImage")
+            newSprite.size = CGSize(width: 60, height: 48)
+            newSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: newSprite.size.width,
+                                                                      height: 5),
+                                                  center: CGPoint(x: 0,
+                                                                  y: -newSprite.size.height/2 + 1))
+            
+            newSprite.position = CGPoint(x: 300, y: newSprite.size.height/2)
             
             newSprite.physicsBody?.isDynamic = false
             newSprite.physicsBody?.usesPreciseCollisionDetection = true

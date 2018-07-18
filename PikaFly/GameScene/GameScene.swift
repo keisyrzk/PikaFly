@@ -56,7 +56,8 @@ class GameScene: SKScene {
     private func setupPhysics() {
         
         physicsWorld.gravity = CGVector(dx:0, dy: 0)
-        physicsBody = SKPhysicsBody(edgeLoopFrom: frame)
+//        physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
+         physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: 3000, height: 320))
     }
 
     private func setupCamera() {

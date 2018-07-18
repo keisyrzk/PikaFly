@@ -1,9 +1,13 @@
 import SpriteKit
+import GameplayKit
 
-class GameScene: SKScene {
+
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let pikachu = SKSpriteNode(imageNamed: "pikachuImage")
-    var cam:SKCameraNode!
+    var obstacles: [Obstacle] = []
+    var cam: SKCameraNode!
+    
     
     override func didMove(to view: SKView) {
         
@@ -13,6 +17,7 @@ class GameScene: SKScene {
         
         setupPhysics()
         
+        generateObstacles(number: 1)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -21,11 +26,26 @@ class GameScene: SKScene {
     
     // a way to add new sprites in a loop
     override func didSimulatePhysics() {
-        if let newX = self.children.last?.position.x {
 
-            if newX >= self.frame.width/2 {
-                cam.position = CGPoint(x: newX, y: self.frame.height/2)
-            }
+        if pikachu.position.x >= self.frame.width/2 {
+            cam.position = CGPoint(x: pikachu.position.x, y: self.frame.height/2)
+        }
+            
+       // print("DISTANCE:   \(roundf(Float(pikachu.position.x) - Float(50)))m")
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        
+        let secondNode = contact.bodyB.node as! SKSpriteNode
+        
+        if (contact.bodyA.categoryBitMask == Obstacle.pikachuCategory) && (contact.bodyB.categoryBitMask == Obstacle.bedCategory) {
+            
+            let contactPoint = contact.contactPoint
+            let contact_y = contactPoint.y
+            let target_y = secondNode.position.y
+            let margin = secondNode.frame.size.height/2 - 25
+                        
+            pikachu.physicsBody?.velocity = CGVector(dx: 1000, dy: -3000)
         }
     }
     
@@ -36,7 +56,9 @@ class GameScene: SKScene {
         pikachu.position = CGPoint(x: 50, y: 200)
         
         pikachu.physicsBody = SKPhysicsBody(texture: pikachu.texture!, size: pikachu.size)
-        pikachu.physicsBody?.restitution = 0.8
+        pikachu.physicsBody?.restitution = 0.6
+        pikachu.physicsBody?.categoryBitMask = Obstacle.pikachuCategory
+        pikachu.physicsBody?.contactTestBitMask = Obstacle.pikachuCategory | Obstacle.bedCategory
         
         self.addChild(pikachu)
     }
@@ -56,8 +78,9 @@ class GameScene: SKScene {
     private func setupPhysics() {
         
         physicsWorld.gravity = CGVector(dx:0, dy: 0)
-//        physicsBody = SKPhysicsBody(edgeLoopFrom: self.frame)
-         physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: 3000, height: 320))
+        physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: 3000, height: 5000))
+        
+        physicsWorld.contactDelegate = self
     }
 
     private func setupCamera() {
@@ -75,6 +98,23 @@ class GameScene: SKScene {
     
     private func getRadians(from angle: CGFloat) -> CGFloat {
         return angle * 3.14 / 180
+    }
+    
+    private func generateObstacles(number: Int) {
+        
+        for _ in 0 ..< number {
+            let obstacle = Obstacle(obstacleType: .Bed)
+            obstacles.append(obstacle)
+        }
+        
+        addObstaclesToScene()
+    }
+    
+    private func addObstaclesToScene() {
+        
+        obstacles.forEach { (obstacle) in
+            self.addChild(obstacle.sprite)
+        }
     }
 
 }

@@ -10,10 +10,12 @@ import SpriteKit
 
 enum ObstacleType: Int {
     case Slowpoke
+    case Articuno
     
     var spriteName: String {
         let spriteNames = [
-            "slowpoke"]
+            "slowpoke",
+            "articuno"]
         
         return spriteNames[rawValue]
     }
@@ -62,7 +64,20 @@ class Obstacle: CustomStringConvertible, Hashable {
             newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
             
             self.sprite = newSprite
+            
+        case .Articuno:
+            let atlas = SKTextureAtlas(named: "Articuno")
+            let newSprite = SKSpriteNode(texture: atlas.textureNamed("0"))
+            newSprite.size = CGSize(width: 128, height: 136)
+            newSprite.physicsBody = SKPhysicsBody(texture: newSprite.texture!, size: newSprite.size)
+            
+            newSprite.physicsBody?.isDynamic = false
+            newSprite.physicsBody?.usesPreciseCollisionDetection = true
+            newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
+            
+            self.sprite = newSprite
         }
+        
     }
     
     

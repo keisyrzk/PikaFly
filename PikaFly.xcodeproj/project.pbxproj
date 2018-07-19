@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B2C1C9621009FBA00BDD53B /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B2C1C9521009FBA00BDD53B /* Actions.sks */; };
+		5B2C1C982100A04400BDD53B /* Articuno.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5B2C1C972100A04400BDD53B /* Articuno.atlas */; };
 		5B6A5E7620FF30D0004A48F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6A5E7520FF30D0004A48F5 /* AppDelegate.swift */; };
 		5B6A5E7820FF30D0004A48F5 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B6A5E7720FF30D0004A48F5 /* GameScene.sks */; };
 		5B6A5E7C20FF30D0004A48F5 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6A5E7B20FF30D0004A48F5 /* GameScene.swift */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B2C1C9521009FBA00BDD53B /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
+		5B2C1C972100A04400BDD53B /* Articuno.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Articuno.atlas; sourceTree = "<group>"; };
 		5B6A5E7220FF30D0004A48F5 /* PikaFly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PikaFly.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B6A5E7520FF30D0004A48F5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5B6A5E7720FF30D0004A48F5 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -44,6 +48,7 @@
 		5B2C1C8F2100702A00BDD53B /* Atlasses */ = {
 			isa = PBXGroup;
 			children = (
+				5B2C1C972100A04400BDD53B /* Articuno.atlas */,
 			);
 			path = Atlasses;
 			sourceTree = "<group>";
@@ -84,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				5B6A5E7720FF30D0004A48F5 /* GameScene.sks */,
+				5B2C1C9521009FBA00BDD53B /* Actions.sks */,
 				5B6A5E7B20FF30D0004A48F5 /* GameScene.swift */,
 			);
 			path = GameScene;
@@ -159,6 +165,8 @@
 				5B6A5E7820FF30D0004A48F5 /* GameScene.sks in Resources */,
 				5B6A5E8320FF30D0004A48F5 /* Assets.xcassets in Resources */,
 				5B6A5E8620FF30D0004A48F5 /* LaunchScreen.storyboard in Resources */,
+				5B2C1C982100A04400BDD53B /* Articuno.atlas in Resources */,
+				5B2C1C9621009FBA00BDD53B /* Actions.sks in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

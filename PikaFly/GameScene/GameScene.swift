@@ -113,6 +113,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     
                 case "slowpoke":
                     addObstacle(obstacleType: .Slowpoke, node: _node)
+                    
+                case "articuno":
+                    addObstacle(obstacleType: .Articuno, node: _node)
 
                 default:
                     break
@@ -131,6 +134,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.size = obstacle.sprite.size
             obstacles.append(obstacle)
 
+        case .Articuno:
+            let obstacle = Obstacle(obstacleType: .Articuno)
+            node.physicsBody = obstacle.sprite.physicsBody
+            node.size = obstacle.sprite.size
+            obstacles.append(obstacle)
         }
         
         

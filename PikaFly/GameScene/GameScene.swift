@@ -11,6 +11,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var obstacles: [Obstacle] = []
     var cam: SKCameraNode!
     
+    let sceneWidth = 50000
+    let sceneHeight = 5000
+    
     var sceneDelegate: SceneDelegate? = nil
     
     override func didMove(to view: SKView) {
@@ -20,7 +23,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupPikachu()
         
         setupPhysics()
-        setupObstacles()
+        generateObstacles()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -87,7 +90,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setupPhysics() {
         
         physicsWorld.gravity = CGVector(dx:0, dy: 0)
-        physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: 100000, height: 5000))
+        physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: sceneWidth, height: sceneHeight))
         
         physicsWorld.contactDelegate = self
     }
@@ -113,42 +116,69 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return angle * 3.14 / 180
     }
     
-    private func setupObstacles() {
+    private func generateObstacles() {
         
-        self.children.forEach { (node) in
-            
-            if let _node = node as? SKSpriteNode {
-                
-                switch _node.name {
-                    
-                case "slowpoke":
-                    addObstacle(obstacleType: .Slowpoke, node: _node)
-                    
-                case "articuno":
-                    addObstacle(obstacleType: .Articuno, node: _node)
-
-                default:
-                    break
-                }
-            }
+        // slowpoke
+        for xPos in stride(from: 300, to: sceneWidth * 8 / 100, by: 500) {
+            let obstacle = Obstacle(obstacleType: .Slowpoke, xPosition: CGFloat(xPos))
+            obstacles.append(obstacle)
+        }
+        
+        // articuno
+        for xPos in stride(from: 200, to: sceneWidth * 8 / 100, by: 500) {
+            let obstacle = Obstacle(obstacleType: .Articuno, xPosition: CGFloat(xPos))
+            obstacles.append(obstacle)
+        }
+        
+        addObstaclesToScene()
+    }
+    
+    private func addObstaclesToScene() {
+        
+        obstacles.forEach { (obstacle) in
+            self.addChild(obstacle.sprite)
         }
     }
     
-    private func addObstacle(obstacleType: ObstacleType, node: SKSpriteNode) {
-        
-        switch obstacleType {
-            
-        case .Slowpoke:
-            let obstacle = Obstacle(obstacleType: .Slowpoke)
-            node.physicsBody = obstacle.sprite.physicsBody
-            node.size = obstacle.sprite.size
-            obstacles.append(obstacle)
-
-        case .Articuno:
-            let obstacle = Obstacle(obstacleType: .Articuno)
-            node.physicsBody = obstacle.sprite.physicsBody
-            node.size = obstacle.sprite.size
-            obstacles.append(obstacle)
-        }
-    }
+    
+    
+//    private func setupObstacles() {
+//
+//        self.children.forEach { (node) in
+//
+//            if let _node = node as? SKSpriteNode {
+//
+//                switch _node.name {
+//
+//                case "slowpoke":
+//                    addObstacle(obstacleType: .Slowpoke, node: _node)
+//
+//                case "articuno":
+//                    addObstacle(obstacleType: .Articuno, node: _node)
+//
+//                default:
+//                    break
+//                }
+//            }
+//        }
+//    }
+//
+//
+//    private func addObstacle(obstacleType: ObstacleType, node: SKSpriteNode) {
+//
+//        switch obstacleType {
+//
+//        case .Slowpoke:
+//            let obstacle = Obstacle(obstacleType: .Slowpoke)
+//            node.physicsBody = obstacle.sprite.physicsBody
+//            node.size = obstacle.sprite.size
+//            obstacles.append(obstacle)
+//
+//        case .Articuno:
+//            let obstacle = Obstacle(obstacleType: .Articuno)
+//            node.physicsBody = obstacle.sprite.physicsBody
+//            node.size = obstacle.sprite.size
+//            obstacles.append(obstacle)
+//        }
+//    }
 }

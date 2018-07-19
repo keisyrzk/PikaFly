@@ -46,7 +46,7 @@ class Obstacle: CustomStringConvertible, Hashable {
     }
     
     
-    init(obstacleType: ObstacleType) {
+    init(obstacleType: ObstacleType, xPosition: CGFloat) {
         self.obstacleType = obstacleType
         
         switch obstacleType {
@@ -54,11 +54,12 @@ class Obstacle: CustomStringConvertible, Hashable {
         case .Slowpoke:
             let newSprite = SKSpriteNode(imageNamed: "slowpokeImage")
             newSprite.size = CGSize(width: 60, height: 48)
+            newSprite.position = CGPoint(x: xPosition, y: newSprite.size.height/2)
+            
             newSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: newSprite.size.width,
                                                                       height: 5),
                                                   center: CGPoint(x: 0,
                                                                   y: -newSprite.size.height/2 + 3))
-                        
             newSprite.physicsBody?.isDynamic = false
             newSprite.physicsBody?.usesPreciseCollisionDetection = true
             newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
@@ -69,11 +70,16 @@ class Obstacle: CustomStringConvertible, Hashable {
             let atlas = SKTextureAtlas(named: "Articuno")
             let newSprite = SKSpriteNode(texture: atlas.textureNamed("0"))
             newSprite.size = CGSize(width: 128, height: 136)
-            newSprite.physicsBody = SKPhysicsBody(texture: newSprite.texture!, size: newSprite.size)
+            newSprite.position = CGPoint(x: xPosition, y: 300)
             
+            newSprite.physicsBody = SKPhysicsBody(texture: newSprite.texture!, size: newSprite.size)
             newSprite.physicsBody?.isDynamic = false
             newSprite.physicsBody?.usesPreciseCollisionDetection = true
             newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
+            
+            if let action = SKAction(named: "ArticunoAction") {
+                newSprite.run(action)
+            }
             
             self.sprite = newSprite
         }

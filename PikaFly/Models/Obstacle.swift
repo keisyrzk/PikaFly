@@ -32,6 +32,7 @@ class Obstacle: CustomStringConvertible, Hashable {
     
     let obstacleType: ObstacleType
     var sprite: SKSpriteNode
+    var fieldNode: SKFieldNode?
     
     var hashValue: Int {
         return obstacleType.hashValue + Int(arc4random_uniform(999999))
@@ -56,14 +57,20 @@ class Obstacle: CustomStringConvertible, Hashable {
             newSprite.size = CGSize(width: 60, height: 48)
             newSprite.position = CGPoint(x: xPosition, y: newSprite.size.height/2)
             
-            newSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: newSprite.size.width,
-                                                                      height: 5),
-                                                  center: CGPoint(x: 0,
-                                                                  y: -newSprite.size.height/2 + 3))
-            newSprite.physicsBody?.isDynamic = false
-            newSprite.physicsBody?.usesPreciseCollisionDetection = true
-            newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
+//            newSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: newSprite.size.width,
+//                                                                      height: 5),
+//                                                  center: CGPoint(x: 0,
+//                                                                  y: -newSprite.size.height/2 + 3))
+//            newSprite.physicsBody?.isDynamic = false
+//            newSprite.physicsBody?.usesPreciseCollisionDetection = true
+//            newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
             
+            let vField = SKFieldNode.velocityField(with: SKTexture(imageNamed: "slowpokeImage"))
+            vField.position = newSprite.position
+            vField.strength = 5
+            vField.region = SKRegion(size: newSprite.size)
+            
+            self.fieldNode = vField
             self.sprite = newSprite
             
         case .Articuno:
@@ -72,15 +79,21 @@ class Obstacle: CustomStringConvertible, Hashable {
             newSprite.size = CGSize(width: 128, height: 136)
             newSprite.position = CGPoint(x: xPosition, y: 300)
             
-            newSprite.physicsBody = SKPhysicsBody(texture: newSprite.texture!, size: newSprite.size)
-            newSprite.physicsBody?.isDynamic = false
-            newSprite.physicsBody?.usesPreciseCollisionDetection = true
-            newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
+//            newSprite.physicsBody = SKPhysicsBody(texture: newSprite.texture!, size: newSprite.size)
+//            newSprite.physicsBody?.isDynamic = false
+//            newSprite.physicsBody?.usesPreciseCollisionDetection = true
+//            newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
             
             if let action = SKAction(named: "ArticunoAction") {
                 newSprite.run(action)
             }
             
+            let vField = SKFieldNode.velocityField(with: atlas.textureNamed("0"))
+            vField.position = newSprite.position
+            vField.strength = 5
+            vField.region = SKRegion(size: newSprite.size)
+            
+            self.fieldNode = vField
             self.sprite = newSprite
         }
         

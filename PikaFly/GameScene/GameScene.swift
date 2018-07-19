@@ -44,22 +44,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let distance = "\(Int(pikachu.position.x) - Int(49))m"
         sceneDelegate?.distanceDidChange(distance: distance)
+        
+        print("SPEED:  \(pikachu.physicsBody?.velocity)")
     }
     
-    func didBegin(_ contact: SKPhysicsContact) {
-        
-        let secondNode = contact.bodyB.node as! SKSpriteNode
-        
-        if (contact.bodyA.categoryBitMask == Obstacle.pikachuCategory) && (contact.bodyB.categoryBitMask == Obstacle.slowpokeCategory) {
-            
-            let contactPoint = contact.contactPoint
-            let contact_y = contactPoint.y
-            let target_y = secondNode.position.y
-            let margin = secondNode.frame.size.height/2 - 25
-                        
-            pikachu.physicsBody?.velocity = CGVector(dx: 1000, dy: -3000)
-        }
-    }
+//    func didBegin(_ contact: SKPhysicsContact) {
+//        
+//        let secondNode = contact.bodyB.node as! SKSpriteNode
+//        
+//        if (contact.bodyA.categoryBitMask == Obstacle.pikachuCategory) && (contact.bodyB.categoryBitMask == Obstacle.slowpokeCategory) {
+//            
+//            let contactPoint = contact.contactPoint
+//            let contact_y = contactPoint.y
+//            let target_y = secondNode.position.y
+//            let margin = secondNode.frame.size.height/2 - 25
+//
+//            pikachu.physicsBody?.velocity = CGVector(dx: 1000, dy: -3000)
+//        }
+//    }
     
     private func setupPikachu() {
         
@@ -137,6 +139,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         obstacles.forEach { (obstacle) in
             self.addChild(obstacle.sprite)
+            if let field = obstacle.fieldNode {
+                self.addChild(field)
+            }
         }
     }
     

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A278a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -9,16 +13,72 @@
         <!--Game View Controller-->
         <scene sceneID="tXr-a1-R10">
             <objects>
-                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BV1-FR-VrT" customClass="GameViewController" customModule="PikaFly" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" multipleTouchEnabled="YES" contentMode="scaleToFill" id="3se-qz-xqx" customClass="SKView">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ssG-ja-9ia">
+                                <rect key="frame" x="241" y="606" width="134" height="41"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZp-9N-aTw">
+                                        <rect key="frame" x="33" y="21" width="101" height="15"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0 m" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QyK-2h-kl6">
+                                                <rect key="frame" x="15" y="0.0" width="76" height="16"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="1" green="0.83234566450000003" blue="0.47320586440000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="Bph-bW-sxg"/>
+                                            <constraint firstItem="QyK-2h-kl6" firstAttribute="leading" secondItem="KZp-9N-aTw" secondAttribute="leading" constant="15" id="CLD-t5-eiM"/>
+                                            <constraint firstAttribute="trailing" secondItem="QyK-2h-kl6" secondAttribute="trailing" constant="10" id="H9P-8H-eqj"/>
+                                            <constraint firstAttribute="width" constant="101" id="LCq-vu-DRw"/>
+                                            <constraint firstItem="QyK-2h-kl6" firstAttribute="centerY" secondItem="KZp-9N-aTw" secondAttribute="centerY" id="wdi-th-F4Y"/>
+                                        </constraints>
+                                    </view>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pikaFace" translatesAutoresizingMaskIntoConstraints="NO" id="lFQ-zV-ngw">
+                                        <rect key="frame" x="0.0" y="0.0" width="54" height="41"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="54" id="pha-eI-Kii"/>
+                                            <constraint firstAttribute="height" constant="41" id="sCp-6L-86r"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="KZp-9N-aTw" secondAttribute="bottom" constant="5" id="681-mh-Bq1"/>
+                                    <constraint firstAttribute="trailing" secondItem="KZp-9N-aTw" secondAttribute="trailing" id="PV2-Fr-Ivy"/>
+                                    <constraint firstAttribute="bottom" secondItem="lFQ-zV-ngw" secondAttribute="bottom" id="Qly-YL-0zK"/>
+                                    <constraint firstItem="KZp-9N-aTw" firstAttribute="top" secondItem="ssG-ja-9ia" secondAttribute="top" constant="21" id="bta-4Z-TVq"/>
+                                    <constraint firstAttribute="height" constant="41" id="dL5-Q5-rXT"/>
+                                    <constraint firstItem="KZp-9N-aTw" firstAttribute="leading" secondItem="ssG-ja-9ia" secondAttribute="leading" constant="33" id="kmG-KX-RqS"/>
+                                    <constraint firstItem="lFQ-zV-ngw" firstAttribute="leading" secondItem="ssG-ja-9ia" secondAttribute="leading" id="l41-YW-FIU"/>
+                                    <constraint firstItem="lFQ-zV-ngw" firstAttribute="top" secondItem="ssG-ja-9ia" secondAttribute="top" id="pFy-Po-W58"/>
+                                    <constraint firstAttribute="width" constant="134" id="psY-ds-ewM"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ssG-ja-9ia" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="5OG-LG-aOr"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="bottom" secondItem="ssG-ja-9ia" secondAttribute="bottom" constant="20" id="Qj4-Av-AzQ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                     </view>
+                    <connections>
+                        <outlet property="distanceLabel" destination="QyK-2h-kl6" id="tj6-4U-BpT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="33.733133433283363"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="pikaFace" width="873" height="914"/>
+    </resources>
 </document>

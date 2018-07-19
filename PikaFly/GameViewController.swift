@@ -9,9 +9,10 @@
 import UIKit
 import SpriteKit
 
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, SceneDelegate {
 
     var scene: GameScene!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,8 +26,14 @@ class GameViewController: UIViewController {
             scene.scaleMode = .resizeFill
             skView.presentScene(scene)
         }
+        
+        scene.sceneDelegate = self
     }
 
+    func distanceDidChange(distance: String) {
+        distanceLabel.text = distance
+    }
+    
     override var shouldAutorotate: Bool {
         return true
     }

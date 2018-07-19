@@ -1,6 +1,9 @@
 import SpriteKit
 import GameplayKit
 
+protocol SceneDelegate {
+    func distanceDidChange(distance: String)
+}
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
@@ -8,6 +11,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var obstacles: [Obstacle] = []
     var cam: SKCameraNode!
     
+    var sceneDelegate: SceneDelegate? = nil
     
     override func didMove(to view: SKView) {
         
@@ -34,8 +38,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 cam.position = pikachu.position
             }
         }
-            
-       // print("DISTANCE:   \(roundf(Float(pikachu.position.x) - Float(50)))m")
+        
+        let distance = "\(Int(pikachu.position.x) - Int(49))m"
+        sceneDelegate?.distanceDidChange(distance: distance)
     }
     
     func didBegin(_ contact: SKPhysicsContact) {
@@ -145,7 +150,5 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             node.size = obstacle.sprite.size
             obstacles.append(obstacle)
         }
-        
-        
     }
 }

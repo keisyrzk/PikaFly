@@ -27,7 +27,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func didSimulatePhysics() {
 
         if pikachu.position.x >= self.frame.width/2 {
-            cam.position = CGPoint(x: pikachu.position.x, y: self.frame.height/2)
+            if pikachu.position.y < self.frame.height/2 {
+                cam.position = CGPoint(x: pikachu.position.x, y: self.frame.height/2)
+            }
+            else {
+                cam.position = pikachu.position
+            }
         }
             
        // print("DISTANCE:   \(roundf(Float(pikachu.position.x) - Float(50)))m")

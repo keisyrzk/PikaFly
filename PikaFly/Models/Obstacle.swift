@@ -57,7 +57,7 @@ class Obstacle: CustomStringConvertible, Hashable {
             newSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: newSprite.size.width,
                                                                       height: 5),
                                                   center: CGPoint(x: 0,
-                                                                  y: -newSprite.size.height/2 + 1))
+                                                                  y: -newSprite.size.height/2 + 3))
                         
             newSprite.physicsBody?.isDynamic = false
             newSprite.physicsBody?.usesPreciseCollisionDetection = true

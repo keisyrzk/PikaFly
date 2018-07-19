@@ -16,8 +16,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         setupPikachu()
         
         setupPhysics()
+        setupObstacles()
+       // generateObstacles(number: 1)
+
         
-        generateObstacles(number: 1)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -38,7 +40,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let secondNode = contact.bodyB.node as! SKSpriteNode
         
-        if (contact.bodyA.categoryBitMask == Obstacle.pikachuCategory) && (contact.bodyB.categoryBitMask == Obstacle.bedCategory) {
+        if (contact.bodyA.categoryBitMask == Obstacle.pikachuCategory) && (contact.bodyB.categoryBitMask == Obstacle.slowpokeCategory) {
             
             let contactPoint = contact.contactPoint
             let contact_y = contactPoint.y
@@ -58,7 +60,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pikachu.physicsBody = SKPhysicsBody(texture: pikachu.texture!, size: pikachu.size)
         pikachu.physicsBody?.restitution = 0.6
         pikachu.physicsBody?.categoryBitMask = Obstacle.pikachuCategory
-        pikachu.physicsBody?.contactTestBitMask = Obstacle.pikachuCategory | Obstacle.bedCategory
+        pikachu.physicsBody?.contactTestBitMask = Obstacle.pikachuCategory | Obstacle.slowpokeCategory
         
         self.addChild(pikachu)
     }
@@ -78,7 +80,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setupPhysics() {
         
         physicsWorld.gravity = CGVector(dx:0, dy: 0)
-        physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: 3000, height: 5000))
+        physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: 100000, height: 5000))
         
         physicsWorld.contactDelegate = self
     }
@@ -100,21 +102,47 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         return angle * 3.14 / 180
     }
     
-    private func generateObstacles(number: Int) {
+    private func setupObstacles() {
         
-        for _ in 0 ..< number {
-            let obstacle = Obstacle(obstacleType: .Slowpoke)
-            obstacles.append(obstacle)
+        self.children.forEach { (node) in
+            
+            if let _node = node as? SKSpriteNode {
+                
+                switch _node.name {
+                    
+                case "slowpoke":
+                    addObstacle(obstacleType: .Slowpoke, node: _node)
+                    
+                default:
+                    break
+                }
+            }
         }
-        
-        addObstaclesToScene()
     }
     
-    private func addObstaclesToScene() {
+    private func addObstacle(obstacleType: ObstacleType, node: SKSpriteNode) {
         
-        obstacles.forEach { (obstacle) in
-            self.addChild(obstacle.sprite)
-        }
+        let obstacle = Obstacle(obstacleType: .Slowpoke)
+        node.physicsBody = obstacle.sprite.physicsBody
+        node.size = obstacle.sprite.size
+        obstacles.append(obstacle)
     }
+    
+//    private func generateObstacles(number: Int) {
+//
+//        for _ in 0 ..< number {
+//            let obstacle = Obstacle(obstacleType: .Slowpoke)
+//            obstacles.append(obstacle)
+//        }
+//
+//        addObstaclesToScene()
+//    }
+//
+//    private func addObstaclesToScene() {
+//
+//        obstacles.forEach { (obstacle) in
+//            self.addChild(obstacle.sprite)
+//        }
+//    }
 
 }

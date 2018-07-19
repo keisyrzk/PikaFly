@@ -26,7 +26,7 @@ enum ObstacleType: Int {
 class Obstacle: CustomStringConvertible, Hashable {
     
     static let pikachuCategory: UInt32 = 0x1 << 0
-    static let bedCategory: UInt32 = 0x1 << 1
+    static let slowpokeCategory: UInt32 = 0x1 << 1
     
     let obstacleType: ObstacleType
     var sprite: SKSpriteNode
@@ -57,11 +57,11 @@ class Obstacle: CustomStringConvertible, Hashable {
                                                   center: CGPoint(x: 0,
                                                                   y: -newSprite.size.height/2 + 1))
             
-            newSprite.position = CGPoint(x: 300, y: newSprite.size.height/2)
+//            newSprite.position = CGPoint(x: 300, y: newSprite.size.height/2)
             
             newSprite.physicsBody?.isDynamic = false
             newSprite.physicsBody?.usesPreciseCollisionDetection = true
-            newSprite.physicsBody?.categoryBitMask = Obstacle.bedCategory
+            newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
             
             self.sprite = newSprite
             

@@ -41,6 +41,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5B2C1C8F2100702A00BDD53B /* Atlasses */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Atlasses;
+			sourceTree = "<group>";
+		};
 		5B6A5E6920FF30D0004A48F5 = {
 			isa = PBXGroup;
 			children = (
@@ -60,14 +67,15 @@
 		5B6A5E7420FF30D0004A48F5 /* PikaFly */ = {
 			isa = PBXGroup;
 			children = (
+				5B6A5E8420FF30D0004A48F5 /* LaunchScreen.storyboard */,
+				5B6A5E8720FF30D0004A48F5 /* Info.plist */,
 				5B6A5E7520FF30D0004A48F5 /* AppDelegate.swift */,
 				5BB9CF4D20FF59AE00EAF2B3 /* Models */,
 				5B6A5E8D20FF395F004A48F5 /* GameScene */,
 				5B6A5E7D20FF30D0004A48F5 /* GameViewController.swift */,
 				5B6A5E7F20FF30D0004A48F5 /* Main.storyboard */,
 				5B6A5E8220FF30D0004A48F5 /* Assets.xcassets */,
-				5B6A5E8420FF30D0004A48F5 /* LaunchScreen.storyboard */,
-				5B6A5E8720FF30D0004A48F5 /* Info.plist */,
+				5B2C1C8F2100702A00BDD53B /* Atlasses */,
 			);
 			path = PikaFly;
 			sourceTree = "<group>";

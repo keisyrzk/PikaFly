@@ -112,7 +112,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     
                 case "slowpoke":
                     addObstacle(obstacleType: .Slowpoke, node: _node)
-                    
+
                 default:
                     break
                 }
@@ -122,10 +122,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func addObstacle(obstacleType: ObstacleType, node: SKSpriteNode) {
         
-        let obstacle = Obstacle(obstacleType: .Slowpoke)
-        node.physicsBody = obstacle.sprite.physicsBody
-        node.size = obstacle.sprite.size
-        obstacles.append(obstacle)
+        switch obstacleType {
+            
+        case .Slowpoke:
+            let obstacle = Obstacle(obstacleType: .Slowpoke)
+            node.physicsBody = obstacle.sprite.physicsBody
+            node.size = obstacle.sprite.size
+            obstacles.append(obstacle)
+
+        }
+        
+        
     }
     
 //    private func generateObstacles(number: Int) {

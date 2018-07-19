@@ -56,15 +56,12 @@ class Obstacle: CustomStringConvertible, Hashable {
                                                                       height: 5),
                                                   center: CGPoint(x: 0,
                                                                   y: -newSprite.size.height/2 + 1))
-            
-//            newSprite.position = CGPoint(x: 300, y: newSprite.size.height/2)
-            
+                        
             newSprite.physicsBody?.isDynamic = false
             newSprite.physicsBody?.usesPreciseCollisionDetection = true
             newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
             
             self.sprite = newSprite
-            
         }
     }
     

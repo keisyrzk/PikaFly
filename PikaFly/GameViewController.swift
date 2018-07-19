@@ -11,6 +11,8 @@ import SpriteKit
 
 class GameViewController: UIViewController {
 
+    var scene: GameScene!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,7 +20,8 @@ class GameViewController: UIViewController {
         skView.isMultipleTouchEnabled = false
         skView.showsPhysics = true
         
-        if let scene = SKScene(fileNamed: "GameScene") {
+        if let _scene = SKScene(fileNamed: "GameScene") {
+            scene = _scene as! GameScene
             scene.scaleMode = .resizeFill
             skView.presentScene(scene)
         }
@@ -26,6 +29,12 @@ class GameViewController: UIViewController {
 
     override var shouldAutorotate: Bool {
         return true
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        scene.size = size
+        scene.resetCameraPosition()
     }
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

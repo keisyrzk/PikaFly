@@ -17,9 +17,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         setupPhysics()
         setupObstacles()
-       // generateObstacles(number: 1)
-
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -92,6 +89,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.camera = cam       //set the scene's camera to reference cam
         self.addChild(cam)
         
+        resetCameraPosition()
+    }
+    
+    func resetCameraPosition() {
         //position the camera on the gamescene.
         cam.position = CGPoint(x: self.frame.midX,
                                y: self.frame.midY)
@@ -134,22 +135,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         
     }
-    
-//    private func generateObstacles(number: Int) {
-//
-//        for _ in 0 ..< number {
-//            let obstacle = Obstacle(obstacleType: .Slowpoke)
-//            obstacles.append(obstacle)
-//        }
-//
-//        addObstaclesToScene()
-//    }
-//
-//    private func addObstaclesToScene() {
-//
-//        obstacles.forEach { (obstacle) in
-//            self.addChild(obstacle.sprite)
-//        }
-//    }
-
 }

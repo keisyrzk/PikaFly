@@ -42,31 +42,30 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         case .Started:
             
-            let anglePicker = Launcher.createAnglePicker(from: pikachu.position)
-            self.addChild(anglePicker)
+            let launcher = Launcher.createLaucher(from: pikachu.position)
+            self.addChild(launcher)
+            launcher.run(Launcher.getAngleAction())
             
             gameStartedState = .ChooseAngle
             
         case .ChooseAngle:
             
-            if let angleNode = self.children.last {
-                gameModel.getAngle(from: angleNode.zRotation)
+            if let launcherNode = self.children.last {
+                gameModel.getAngle(from: launcherNode.zRotation)
                 gameModel.getDisplacement()
-                angleNode.removeFromParent()
+
+                launcherNode.removeAllActions()
+                launcherNode.run(Launcher.getPowerAction())
             }
-            
-            let powerPicker = Launcher.createPowerPicker(from: pikachu.position)
-            self.addChild(powerPicker)
         
             gameStartedState = .ChoosePower
             
         case .ChoosePower:
             
-            if let powerNode = self.children.last {
+            if let launcherNode = self.children.last {
                 
-                
-                
-                powerNode.removeFromParent()
+                gameModel.getPower(nodeFrame: launcherNode.frame)
+                launcherNode.removeFromParent()
             }
             
             gameStartedState = .Launched

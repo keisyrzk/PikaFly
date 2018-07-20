@@ -23,6 +23,10 @@ class GameModel {
         launchAngel = radians * 180 / 3.14
     }
     
+    func getPower(nodeFrame: CGRect) {
+        power = (nodeFrame.width - 100)
+    }
+    
     func getDisplacement() {
         
         // dx/dy = arcusTan

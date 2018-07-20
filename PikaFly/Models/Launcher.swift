@@ -10,25 +10,23 @@ import SpriteKit
 
 class Launcher {
     
-    static func createAnglePicker(from position: CGPoint) -> SKSpriteNode {
-        
-        let newSprite = SKSpriteNode(imageNamed: "arrow")
-        newSprite.size = CGSize(width: 96, height: 48)
-        newSprite.position = position
-        
-        let action = SKAction(named: "AngleAction")!
-        newSprite.run(SKAction.repeatForever(action))
-        return newSprite
-    }
-    
-    static func createPowerPicker(from position: CGPoint) -> SKSpriteNode {
-        
+    static func createLaucher(from position: CGPoint) -> SKSpriteNode {
         let newSprite = SKSpriteNode(imageNamed: "arrow")
         newSprite.size = CGSize(width: 96, height: 48)
         newSprite.position = CGPoint(x: position.x + 50, y: position.y)
         
-        let action = SKAction(named: "AngleAction")!
-        newSprite.run(SKAction.repeatForever(action))
         return newSprite
+    }
+    
+    static func getAngleAction() -> SKAction {
+        
+        let action = SKAction(named: "AngleAction")!
+        return SKAction.repeatForever(action)
+    }
+    
+    static func getPowerAction() -> SKAction {
+        
+        let action = SKAction(named: "PowerAction")!
+        return SKAction.repeatForever(action)
     }
 }

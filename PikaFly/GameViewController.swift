@@ -13,9 +13,18 @@ class GameViewController: UIViewController, SceneDelegate {
 
     var scene: GameScene!
     @IBOutlet weak var distanceLabel: UILabel!
+    @IBOutlet weak var popupView: UIView!
+    @IBOutlet weak var popupLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        startNewGame()
+    }
+
+    func startNewGame() {
+        popupView.isHidden = false
+        popupLabel.text = "TAP TO START"
         
         let skView = view as! SKView
         skView.isMultipleTouchEnabled = false
@@ -29,9 +38,22 @@ class GameViewController: UIViewController, SceneDelegate {
         
         scene.sceneDelegate = self
     }
-
+    
     func distanceDidChange(distance: String) {
         distanceLabel.text = distance
+    }
+    
+    func gameShouldStart() {
+        startNewGame()
+    }
+    
+    func pikachuDidStart() {
+        popupView.isHidden = true
+    }
+    
+    func pikachuDidStop() {
+        popupView.isHidden = false
+        popupLabel.text = "PIKACHU FAINTED at \(String(describing: distanceLabel.text!))"
     }
     
     override var shouldAutorotate: Bool {

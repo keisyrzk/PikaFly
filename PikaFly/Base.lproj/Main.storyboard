@@ -61,16 +61,57 @@
                                     <constraint firstAttribute="width" constant="134" id="psY-ds-ewM"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5WE-lf-Yg4">
+                                <rect key="frame" x="0.0" y="293.5" width="375" height="100"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pikachuBackground" translatesAutoresizingMaskIntoConstraints="NO" id="o8D-c0-KKE">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pikachu" translatesAutoresizingMaskIntoConstraints="NO" id="uIT-6q-2Hd">
+                                        <rect key="frame" x="0.0" y="-25" width="156" height="150"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="156" id="MdA-Kx-TAs"/>
+                                            <constraint firstAttribute="height" constant="150" id="dV6-QU-a7B"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAP TO START" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hL6-rb-zEX">
+                                        <rect key="frame" x="176" y="10" width="179" height="80"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="uIT-6q-2Hd" firstAttribute="centerY" secondItem="o8D-c0-KKE" secondAttribute="centerY" id="5yD-1Q-i3D"/>
+                                    <constraint firstItem="o8D-c0-KKE" firstAttribute="leading" secondItem="5WE-lf-Yg4" secondAttribute="leading" id="8lL-Lu-Kl1"/>
+                                    <constraint firstAttribute="trailing" secondItem="hL6-rb-zEX" secondAttribute="trailing" constant="20" id="BRK-6K-pUO"/>
+                                    <constraint firstItem="hL6-rb-zEX" firstAttribute="top" secondItem="5WE-lf-Yg4" secondAttribute="top" constant="10" id="LNi-SE-xpn"/>
+                                    <constraint firstAttribute="bottom" secondItem="o8D-c0-KKE" secondAttribute="bottom" id="Vn2-lk-mgp"/>
+                                    <constraint firstItem="hL6-rb-zEX" firstAttribute="leading" secondItem="uIT-6q-2Hd" secondAttribute="trailing" constant="20" id="XjK-Z7-7bb"/>
+                                    <constraint firstAttribute="height" constant="100" id="aI2-hk-LLp"/>
+                                    <constraint firstAttribute="bottom" secondItem="hL6-rb-zEX" secondAttribute="bottom" constant="10" id="nRW-kk-Si0"/>
+                                    <constraint firstAttribute="trailing" secondItem="o8D-c0-KKE" secondAttribute="trailing" id="qNN-qU-aNR"/>
+                                    <constraint firstItem="uIT-6q-2Hd" firstAttribute="leading" secondItem="5WE-lf-Yg4" secondAttribute="leading" id="sKn-7s-oDv"/>
+                                    <constraint firstItem="o8D-c0-KKE" firstAttribute="top" secondItem="5WE-lf-Yg4" secondAttribute="top" id="zv1-qi-cA1"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="ssG-ja-9ia" firstAttribute="trailing" secondItem="4qk-I5-YsI" secondAttribute="trailing" id="5OG-LG-aOr"/>
+                            <constraint firstItem="4qk-I5-YsI" firstAttribute="trailing" secondItem="5WE-lf-Yg4" secondAttribute="trailing" id="JI2-sw-H5D"/>
+                            <constraint firstItem="5WE-lf-Yg4" firstAttribute="leading" secondItem="4qk-I5-YsI" secondAttribute="leading" id="MFb-8Z-LJe"/>
                             <constraint firstItem="4qk-I5-YsI" firstAttribute="bottom" secondItem="ssG-ja-9ia" secondAttribute="bottom" constant="20" id="Qj4-Av-AzQ"/>
+                            <constraint firstItem="5WE-lf-Yg4" firstAttribute="centerY" secondItem="4qk-I5-YsI" secondAttribute="centerY" id="TYg-a5-KVJ"/>
+                            <constraint firstItem="5WE-lf-Yg4" firstAttribute="centerX" secondItem="4qk-I5-YsI" secondAttribute="centerX" id="c3y-dR-Hfx"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4qk-I5-YsI"/>
                     </view>
                     <connections>
                         <outlet property="distanceLabel" destination="QyK-2h-kl6" id="tj6-4U-BpT"/>
+                        <outlet property="popupLabel" destination="hL6-rb-zEX" id="fxR-wu-7w8"/>
+                        <outlet property="popupView" destination="5WE-lf-Yg4" id="ohR-Jy-mKE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SZV-WD-TEh" sceneMemberID="firstResponder"/>
@@ -80,5 +121,7 @@
     </scenes>
     <resources>
         <image name="pikaFace" width="873" height="914"/>
+        <image name="pikachu" width="563" height="579"/>
+        <image name="pikachuBackground" width="1920" height="1080"/>
     </resources>
 </document>

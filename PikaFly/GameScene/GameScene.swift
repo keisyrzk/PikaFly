@@ -3,6 +3,9 @@ import GameplayKit
 
 protocol SceneDelegate {
     func distanceDidChange(distance: String)
+    func gameShouldStart()
+    func pikachuDidStart()
+    func pikachuDidStop()
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -42,6 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         case .Started:
             
+            sceneDelegate?.pikachuDidStart()
             let launcher = Launcher.createLaucher(from: pikachu.position)
             self.addChild(launcher)
             launcher.run(Launcher.getAngleAction())
@@ -74,7 +78,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                                                        dy: gameModel.dy * gameModel.power))
             
         default:
-            break
+            gameStartedState = .Started
+            sceneDelegate?.gameShouldStart()
         }
     }
     
@@ -90,9 +95,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        let distance = "\(Int(pikachu.position.x) - Int(49))m"
-        sceneDelegate?.distanceDidChange(distance: distance)
+        let distance = Int(pikachu.position.x) - Int(49)
+        let pikachuDidStop = abs(Int32(pikachu.physicsBody!.velocity.dx)) < 5 && abs(Int32(pikachu.physicsBody!.velocity.dy)) < 5
+        sceneDelegate?.distanceDidChange(distance: "\(distance)m")
         
+        if pikachuDidStop && distance > 0 {
+            sceneDelegate?.pikachuDidStop()
+        }
     }
     
 //    func didBegin(_ contact: SKPhysicsContact) {
@@ -151,13 +160,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func generateObstacles() {
         
         // slowpoke
-        for xPos in stride(from: 300, to: sceneWidth * 8 / 100, by: 500) {
+        for xPos in stride(from: 300, to: sceneWidth, by: 1500) {
             let obstacle = Obstacle(obstacleType: .Slowpoke, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
         
         // articuno
-        for xPos in stride(from: 200, to: sceneWidth * 8 / 100, by: 500) {
+        for xPos in stride(from: 200, to: sceneWidth, by: 2500) {
             let obstacle = Obstacle(obstacleType: .Articuno, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }

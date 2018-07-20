@@ -6,10 +6,12 @@
 //  Copyright © 2018 Selfcode. All rights reserved.
 //
 
-import UIKit
+import SpriteKit
 
 class GameModel {
     
+    var scene: GameScene!
+
     var launchAngel: CGFloat = 0
     var dx: CGFloat = 0
     var dy: CGFloat = 0
@@ -24,7 +26,7 @@ class GameModel {
     }
     
     func getPower(nodeFrame: CGRect) {
-        power = (nodeFrame.width - 100)
+        power = (nodeFrame.width - 50)
     }
     
     func getDisplacement() {

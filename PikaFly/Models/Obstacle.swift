@@ -65,11 +65,9 @@ class Obstacle: CustomStringConvertible, Hashable {
 //            newSprite.physicsBody?.usesPreciseCollisionDetection = true
 //            newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
             
-            let field = SKFieldNode.velocityField(with: SKTexture(imageNamed: "slowpokeImage"))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(5,5,0))
             field.position = newSprite.position
-            field.strength = 5
             field.region = SKRegion(size: newSprite.size)
-
             
             self.fieldNode = field
             self.sprite = newSprite
@@ -78,7 +76,7 @@ class Obstacle: CustomStringConvertible, Hashable {
             let atlas = SKTextureAtlas(named: "Articuno")
             let newSprite = SKSpriteNode(texture: atlas.textureNamed("0"))
             newSprite.size = CGSize(width: 128, height: 136)
-            newSprite.position = CGPoint(x: xPosition, y: 300)
+            newSprite.position = CGPoint(x: xPosition, y: CGFloat(arc4random_uniform(1000) + 300))
             
 //            newSprite.physicsBody = SKPhysicsBody(texture: newSprite.texture!, size: newSprite.size)
 //            newSprite.physicsBody?.isDynamic = false
@@ -89,17 +87,11 @@ class Obstacle: CustomStringConvertible, Hashable {
                 newSprite.run(action)
             }
             
-//            let field = SKFieldNode.velocityField(with: atlas.textureNamed("0"))
-//            field.position = newSprite.position
-//            field.strength = 5
-//            field.region = SKRegion(size: newSprite.size)
+            let field = SKFieldNode.velocityField(withVector: vector_float3(10,1,0))
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
             
-//            let field = SKFieldNode.radialGravityField()
-//            field.region = SKRegion(size: newSprite.size)
-//            field.strength = 10
-//            field.position = newSprite.position
-            
-//            self.fieldNode = field
+            self.fieldNode = field
             self.sprite = newSprite
         }
         

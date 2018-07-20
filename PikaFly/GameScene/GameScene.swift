@@ -160,7 +160,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func generateObstacles() {
         
         // slowpoke
-        for xPos in stride(from: 300, to: sceneWidth, by: 1500) {
+        for xPos in stride(from: 600, to: sceneWidth, by: 1500) {
             let obstacle = Obstacle(obstacleType: .Slowpoke, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
@@ -168,6 +168,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // articuno
         for xPos in stride(from: 200, to: sceneWidth, by: 2500) {
             let obstacle = Obstacle(obstacleType: .Articuno, xPosition: CGFloat(xPos))
+            obstacles.append(obstacle)
+        }
+        
+        // charizard
+        for xPos in stride(from: 300, to: sceneWidth, by: 4000) {
+            let obstacle = Obstacle(obstacleType: .Charizard, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
         

@@ -11,11 +11,13 @@ import SpriteKit
 enum ObstacleType: Int {
     case Slowpoke
     case Articuno
+    case Charizard
     
     var spriteName: String {
         let spriteNames = [
             "slowpoke",
-            "articuno"]
+            "articuno",
+            "charizard"]
         
         return spriteNames[rawValue]
     }
@@ -73,7 +75,7 @@ class Obstacle: CustomStringConvertible, Hashable {
             self.sprite = newSprite
             
         case .Articuno:
-            let atlas = SKTextureAtlas(named: "Articuno")
+            let atlas = SKTextureAtlas(named: "Sprites")
             let newSprite = SKSpriteNode(texture: atlas.textureNamed("0"))
             newSprite.size = CGSize(width: 128, height: 136)
             newSprite.position = CGPoint(x: xPosition, y: CGFloat(arc4random_uniform(1000) + 300))
@@ -93,7 +95,25 @@ class Obstacle: CustomStringConvertible, Hashable {
             
             self.fieldNode = field
             self.sprite = newSprite
+            
+        case .Charizard:
+            let atlas = SKTextureAtlas(named: "Sprites")
+            let newSprite = SKSpriteNode(texture: atlas.textureNamed("0charizard"))
+            newSprite.size = CGSize(width: 190, height: 104)
+            newSprite.position = CGPoint(x: xPosition, y: newSprite.size.height/2)
+            
+            if let action = SKAction(named: "CharizardAction") {
+                newSprite.run(action)
+            }
+            
+            let field = SKFieldNode.velocityField(withVector: vector_float3(20,2,0))
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            
+            self.fieldNode = field
+            self.sprite = newSprite
         }
+        
         
     }
     

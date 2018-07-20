@@ -7,6 +7,13 @@ protocol SceneDelegate {
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    enum GameStartState {
+        case Started
+        case ChooseAngle
+        case ChoosePower
+        case Launched
+    }
+    
     let pikachu = SKSpriteNode(imageNamed: "pikachuImage")
     var obstacles: [Obstacle] = []
     var cam: SKCameraNode!
@@ -14,12 +21,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let sceneWidth = 50000
     let sceneHeight = 5000
     
+    var gameStartedState: GameStartState = .Started
+    
+    let gameModel = GameModel()
     var sceneDelegate: SceneDelegate? = nil
+    
     
     override func didMove(to view: SKView) {
         
         setupCamera()
-        setupLauncher()
         setupPikachu()
         
         setupPhysics()
@@ -27,7 +37,46 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        physicsWorld.gravity = CGVector(dx:0 , dy: -9.8)
+        
+        switch gameStartedState {
+            
+        case .Started:
+            
+            let anglePicker = Launcher.createAnglePicker(from: pikachu.position)
+            self.addChild(anglePicker)
+            
+            gameStartedState = .ChooseAngle
+            
+        case .ChooseAngle:
+            
+            if let angleNode = self.children.last {
+                gameModel.getAngle(from: angleNode.zRotation)
+                gameModel.getDisplacement()
+                angleNode.removeFromParent()
+            }
+            
+            let powerPicker = Launcher.createPowerPicker(from: pikachu.position)
+            self.addChild(powerPicker)
+        
+            gameStartedState = .ChoosePower
+            
+        case .ChoosePower:
+            
+            if let powerNode = self.children.last {
+                
+                
+                
+                powerNode.removeFromParent()
+            }
+            
+            gameStartedState = .Launched
+            physicsWorld.gravity = CGVector(dx:0 , dy: -9.8)
+            pikachu.physicsBody?.applyImpulse(CGVector(dx: gameModel.dx * gameModel.power,
+                                                       dy: gameModel.dy * gameModel.power))
+            
+        default:
+            break
+        }
     }
     
     // a way to add new sprites in a loop
@@ -45,7 +94,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let distance = "\(Int(pikachu.position.x) - Int(49))m"
         sceneDelegate?.distanceDidChange(distance: distance)
         
-        print("SPEED:  \(pikachu.physicsBody?.velocity)")
     }
     
 //    func didBegin(_ contact: SKPhysicsContact) {
@@ -66,8 +114,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setupPikachu() {
         
         pikachu.size = CGSize(width: 50, height: 70)
-        pikachu.zRotation = getRadians(from: 30)
-        pikachu.position = CGPoint(x: 50, y: 200)
+        pikachu.zRotation = gameModel.getRadians(from: 30)
+        pikachu.position = CGPoint(x: 50, y: 100)
         
         pikachu.physicsBody = SKPhysicsBody(texture: pikachu.texture!, size: pikachu.size)
         pikachu.physicsBody?.restitution = 0.6
@@ -76,18 +124,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         self.addChild(pikachu)
     }
-    
-    private func setupLauncher() {
-        
-        let rectangle = SKSpriteNode(color: .blue, size: CGSize(width: size.width, height: 20))
-        rectangle.physicsBody = SKPhysicsBody(rectangleOf: rectangle.size)
-        rectangle.zRotation = getRadians(from: 160)
-        rectangle.physicsBody?.isDynamic = false
-        rectangle.physicsBody?.friction = 0.0
-        rectangle.position = CGPoint(x: 50, y: 50)
-        self.addChild(rectangle)
-    }
-
 
     private func setupPhysics() {
         
@@ -111,11 +147,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         //position the camera on the gamescene.
         cam.position = CGPoint(x: self.frame.midX,
                                y: self.frame.midY)
-    }
-
-    
-    private func getRadians(from angle: CGFloat) -> CGFloat {
-        return angle * 3.14 / 180
     }
     
     private func generateObstacles() {

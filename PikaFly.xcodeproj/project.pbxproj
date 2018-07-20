@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5B29815A2101B66800265F8E /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B2981592101B66800265F8E /* Launcher.swift */; };
+		5B29815D2101BE7400265F8E /* GameModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B29815C2101BE7400265F8E /* GameModel.swift */; };
 		5B2C1C9621009FBA00BDD53B /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 5B2C1C9521009FBA00BDD53B /* Actions.sks */; };
 		5B2C1C982100A04400BDD53B /* Articuno.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 5B2C1C972100A04400BDD53B /* Articuno.atlas */; };
 		5B6A5E7620FF30D0004A48F5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6A5E7520FF30D0004A48F5 /* AppDelegate.swift */; };
@@ -20,6 +22,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5B2981592101B66800265F8E /* Launcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
+		5B29815C2101BE7400265F8E /* GameModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameModel.swift; sourceTree = "<group>"; };
 		5B2C1C9521009FBA00BDD53B /* Actions.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Actions.sks; sourceTree = "<group>"; };
 		5B2C1C972100A04400BDD53B /* Articuno.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Articuno.atlas; sourceTree = "<group>"; };
 		5B6A5E7220FF30D0004A48F5 /* PikaFly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PikaFly.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -99,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				5BB9CF4E20FF59DD00EAF2B3 /* Obstacle.swift */,
+				5B2981592101B66800265F8E /* Launcher.swift */,
+				5B29815C2101BE7400265F8E /* GameModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -177,9 +183,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B29815A2101B66800265F8E /* Launcher.swift in Sources */,
 				5B6A5E7C20FF30D0004A48F5 /* GameScene.swift in Sources */,
 				5B6A5E7E20FF30D0004A48F5 /* GameViewController.swift in Sources */,
 				5BB9CF4F20FF59DD00EAF2B3 /* Obstacle.swift in Sources */,
+				5B29815D2101BE7400265F8E /* GameModel.swift in Sources */,
 				5B6A5E7620FF30D0004A48F5 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

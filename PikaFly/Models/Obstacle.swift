@@ -65,12 +65,13 @@ class Obstacle: CustomStringConvertible, Hashable {
 //            newSprite.physicsBody?.usesPreciseCollisionDetection = true
 //            newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
             
-            let vField = SKFieldNode.velocityField(with: SKTexture(imageNamed: "slowpokeImage"))
-            vField.position = newSprite.position
-            vField.strength = 5
-            vField.region = SKRegion(size: newSprite.size)
+            let field = SKFieldNode.velocityField(with: SKTexture(imageNamed: "slowpokeImage"))
+            field.position = newSprite.position
+            field.strength = 5
+            field.region = SKRegion(size: newSprite.size)
+
             
-            self.fieldNode = vField
+            self.fieldNode = field
             self.sprite = newSprite
             
         case .Articuno:
@@ -88,12 +89,17 @@ class Obstacle: CustomStringConvertible, Hashable {
                 newSprite.run(action)
             }
             
-            let vField = SKFieldNode.velocityField(with: atlas.textureNamed("0"))
-            vField.position = newSprite.position
-            vField.strength = 5
-            vField.region = SKRegion(size: newSprite.size)
+//            let field = SKFieldNode.velocityField(with: atlas.textureNamed("0"))
+//            field.position = newSprite.position
+//            field.strength = 5
+//            field.region = SKRegion(size: newSprite.size)
             
-            self.fieldNode = vField
+//            let field = SKFieldNode.radialGravityField()
+//            field.region = SKRegion(size: newSprite.size)
+//            field.strength = 10
+//            field.position = newSprite.position
+            
+//            self.fieldNode = field
             self.sprite = newSprite
         }
         

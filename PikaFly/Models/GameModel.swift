@@ -32,9 +32,9 @@ class GameModel {
     func getDisplacement() {
         
         // dx/dy = arcusTan
-        // dx = arcusTan * dy
+        // dy = dx / arcusTan
         let arcusTan = atan(launchAngel)
-        dx = arcusTan
-        dy = 1
+        dx = 1
+        dy = 1 / arcusTan
     }
 }

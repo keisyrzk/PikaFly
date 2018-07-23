@@ -18,11 +18,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     let pikachu = SKSpriteNode(imageNamed: "pikachuImage")
+    var pokeThrower = SKSpriteNode()
     var obstacles: [Obstacle] = []
     var cam: SKCameraNode!
     
     let sceneWidth = 50000
     let sceneHeight = 5000
+    let pikachuPosition = 200
     
     var gameStartedState: GameStartState = .Started
     
@@ -45,8 +47,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         case .Started:
             
+            setupPokeThrower()
+            
             sceneDelegate?.pikachuDidStart()
-            let launcher = Launcher.createLaucher(from: pikachu.position)
+            
+            let launcher = Launcher.createLaucher(from: pokeThrower.position)
             self.addChild(launcher)
             launcher.run(Launcher.getAngleAction())
             
@@ -73,9 +78,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             
             gameStartedState = .Launched
-            physicsWorld.gravity = CGVector(dx:0 , dy: -9.8)
-            pikachu.physicsBody?.applyImpulse(CGVector(dx: gameModel.dx * gameModel.power,
-                                                       dy: gameModel.dy * gameModel.power))
+            
+            pokeThrower.removeAllActions()
+            if let pokeThrow_start = SKAction(named: "PokeThrow_throw") {
+                pokeThrower.run(pokeThrow_start) {
+                    self.physicsWorld.gravity = CGVector(dx:0 , dy: -9.8)
+                    self.pikachu.physicsBody?.applyImpulse(CGVector(dx: self.gameModel.dx * self.gameModel.power,
+                                                                    dy: self.gameModel.dy * self.gameModel.power))
+                    self.pikachu.isHidden = false
+                }
+            }
             
         default:
             gameStartedState = .Started
@@ -95,9 +107,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        let distance = Int(pikachu.position.x) - Int(49)
+        let distance = Int(pikachu.position.x) - Int(pikachuPosition)
         let pikachuDidStop = abs(Int32(pikachu.physicsBody!.velocity.dx)) < 5 && abs(Int32(pikachu.physicsBody!.velocity.dy)) < 5
-        sceneDelegate?.distanceDidChange(distance: "\(distance)m")
+        sceneDelegate?.distanceDidChange(distance: "\(distance > 0 ? distance : 0)m")
         
         if pikachuDidStop && distance > 0 {
             sceneDelegate?.pikachuDidStop()
@@ -121,9 +133,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func setupPikachu() {
         
+        pikachu.isHidden = true
         pikachu.size = CGSize(width: 50, height: 70)
         pikachu.zRotation = gameModel.getRadians(from: 30)
-        pikachu.position = CGPoint(x: 50, y: 100)
+        pikachu.position = CGPoint(x: pikachuPosition, y: 100)
         
         pikachu.physicsBody = SKPhysicsBody(texture: pikachu.texture!, size: pikachu.size)
         pikachu.physicsBody?.restitution = 0.6
@@ -131,6 +144,20 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pikachu.physicsBody?.contactTestBitMask = Obstacle.pikachuCategory | Obstacle.slowpokeCategory
         
         self.addChild(pikachu)
+    }
+    
+    private func setupPokeThrower() {
+        
+        let atlas = SKTextureAtlas(named: "Sprites")
+        pokeThrower = SKSpriteNode(texture: atlas.textureNamed("0pokeThrow"))
+        pokeThrower.size = CGSize(width: 288, height: 160)
+        pokeThrower.position = CGPoint(x: 100, y: pokeThrower.size.height/2)
+        
+        if let pokeThrow_start = SKAction(named: "PokeThrow_startAction") {
+            pokeThrower.run(pokeThrow_start)
+        }
+        
+        self.addChild(pokeThrower)
     }
 
     private func setupPhysics() {

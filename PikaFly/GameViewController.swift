@@ -15,6 +15,7 @@ class GameViewController: UIViewController, SceneDelegate {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var popupView: UIView!
     @IBOutlet weak var popupLabel: UILabel!
+    @IBOutlet weak var popupImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class GameViewController: UIViewController, SceneDelegate {
     func startNewGame() {
         popupView.isHidden = false
         popupLabel.text = "TAP TO START"
+        popupImage.image = #imageLiteral(resourceName: "pikachu")
         
         let skView = view as! SKView
         skView.isMultipleTouchEnabled = false
@@ -51,9 +53,10 @@ class GameViewController: UIViewController, SceneDelegate {
         popupView.isHidden = true
     }
     
-    func pikachuDidStop() {
+    func pikachuDidStop(isTeamR: Bool) {
         popupView.isHidden = false
-        popupLabel.text = "PIKACHU FAINTED at \(String(describing: distanceLabel.text!))"
+        popupLabel.text = isTeamR ? "PIKACHU BEEN CAUGHT BY TEAM R \nat \(String(describing: distanceLabel.text!))\nyou lose all pokemon" : "PIKACHU REACHED \(String(describing: distanceLabel.text!))"
+        popupImage.image = isTeamR ? #imageLiteral(resourceName: "teamR") : #imageLiteral(resourceName: "pikachu")
     }
     
     override var shouldAutorotate: Bool {

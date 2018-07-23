@@ -5,7 +5,7 @@ protocol SceneDelegate {
     func distanceDidChange(distance: String)
     func gameShouldStart()
     func pikachuDidStart()
-    func pikachuDidStop()
+    func pikachuDidStop(isTeamR: Bool)
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
@@ -112,24 +112,25 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         sceneDelegate?.distanceDidChange(distance: "\(distance > 0 ? distance : 0)m")
         
         if pikachuDidStop && distance > 0 {
-            sceneDelegate?.pikachuDidStop()
+            sceneDelegate?.pikachuDidStop(isTeamR: false)
         }
     }
     
-//    func didBegin(_ contact: SKPhysicsContact) {
-//        
-//        let secondNode = contact.bodyB.node as! SKSpriteNode
-//        
-//        if (contact.bodyA.categoryBitMask == Obstacle.pikachuCategory) && (contact.bodyB.categoryBitMask == Obstacle.slowpokeCategory) {
-//            
-//            let contactPoint = contact.contactPoint
-//            let contact_y = contactPoint.y
-//            let target_y = secondNode.position.y
-//            let margin = secondNode.frame.size.height/2 - 25
-//
-//            pikachu.physicsBody?.velocity = CGVector(dx: 1000, dy: -3000)
-//        }
-//    }
+    func didBegin(_ contact: SKPhysicsContact) {
+        
+        let secondNode = contact.bodyB.node as! SKSpriteNode
+        
+        if (contact.bodyA.categoryBitMask == Obstacle.pikachuCategory) && (contact.bodyB.categoryBitMask == Obstacle.teamRCategory) {
+            
+            let contactPoint = contact.contactPoint
+            let contact_y = contactPoint.y
+            let target_y = secondNode.position.y
+            let margin = secondNode.frame.size.height/2 - 25
+
+            self.isPaused = true
+            sceneDelegate?.pikachuDidStop(isTeamR: true)
+        }
+    }
     
     private func setupPikachu() {
         
@@ -141,7 +142,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pikachu.physicsBody = SKPhysicsBody(texture: pikachu.texture!, size: pikachu.size)
         pikachu.physicsBody?.restitution = 0.6
         pikachu.physicsBody?.categoryBitMask = Obstacle.pikachuCategory
-        pikachu.physicsBody?.contactTestBitMask = Obstacle.pikachuCategory | Obstacle.slowpokeCategory
+        pikachu.physicsBody?.contactTestBitMask = Obstacle.pikachuCategory | Obstacle.teamRCategory
         
         self.addChild(pikachu)
     }
@@ -186,6 +187,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private func generateObstacles() {
         
+        //team R
+        for xPos in stride(from: 600, to: sceneWidth, by: 3200) {
+            let obstacle = Obstacle(obstacleType: .TeamR, xPosition: CGFloat(xPos))
+            obstacles.append(obstacle)
+        }
+        
+        //team R baloon
+        for xPos in stride(from: 500, to: sceneWidth, by: 3200) {
+            let obstacle = Obstacle(obstacleType: .TeamRbaloon, xPosition: CGFloat(xPos))
+            obstacles.append(obstacle)
+        }
+        
         // slowpoke
         for xPos in stride(from: 600, to: sceneWidth, by: 1500) {
             let obstacle = Obstacle(obstacleType: .Slowpoke, xPosition: CGFloat(xPos))
@@ -199,7 +212,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         // charizard
-        for xPos in stride(from: 300, to: sceneWidth, by: 4000) {
+        for xPos in stride(from: 450, to: sceneWidth, by: 4000) {
             let obstacle = Obstacle(obstacleType: .Charizard, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
@@ -216,46 +229,4 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
-    
-    
-    
-//    private func setupObstacles() {
-//
-//        self.children.forEach { (node) in
-//
-//            if let _node = node as? SKSpriteNode {
-//
-//                switch _node.name {
-//
-//                case "slowpoke":
-//                    addObstacle(obstacleType: .Slowpoke, node: _node)
-//
-//                case "articuno":
-//                    addObstacle(obstacleType: .Articuno, node: _node)
-//
-//                default:
-//                    break
-//                }
-//            }
-//        }
-//    }
-//
-//
-//    private func addObstacle(obstacleType: ObstacleType, node: SKSpriteNode) {
-//
-//        switch obstacleType {
-//
-//        case .Slowpoke:
-//            let obstacle = Obstacle(obstacleType: .Slowpoke)
-//            node.physicsBody = obstacle.sprite.physicsBody
-//            node.size = obstacle.sprite.size
-//            obstacles.append(obstacle)
-//
-//        case .Articuno:
-//            let obstacle = Obstacle(obstacleType: .Articuno)
-//            node.physicsBody = obstacle.sprite.physicsBody
-//            node.size = obstacle.sprite.size
-//            obstacles.append(obstacle)
-//        }
-//    }
 }

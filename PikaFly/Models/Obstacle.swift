@@ -9,12 +9,16 @@
 import SpriteKit
 
 enum ObstacleType: Int {
+    case TeamR
+    case TeamRbaloon
     case Slowpoke
     case Articuno
     case Charizard
     
     var spriteName: String {
         let spriteNames = [
+            "teamR",
+            "teamRbaloon",
             "slowpoke",
             "articuno",
             "charizard"]
@@ -30,7 +34,7 @@ enum ObstacleType: Int {
 class Obstacle: CustomStringConvertible, Hashable {
     
     static let pikachuCategory: UInt32 = 0x1 << 0
-    static let slowpokeCategory: UInt32 = 0x1 << 1
+    static let teamRCategory: UInt32 = 0x1 << 1
     
     let obstacleType: ObstacleType
     var sprite: SKSpriteNode
@@ -54,18 +58,34 @@ class Obstacle: CustomStringConvertible, Hashable {
         
         switch obstacleType {
             
+        case .TeamR:
+            let newSprite = SKSpriteNode(imageNamed: "teamR")
+            newSprite.size = CGSize(width: 50, height: 98)
+            newSprite.position = CGPoint(x: xPosition, y: newSprite.size.height/2)
+            
+            newSprite.physicsBody = SKPhysicsBody(texture: newSprite.texture!, size: newSprite.size)
+            newSprite.physicsBody?.isDynamic = false
+            newSprite.physicsBody?.usesPreciseCollisionDetection = true
+            newSprite.physicsBody?.categoryBitMask = Obstacle.teamRCategory
+            
+            self.sprite = newSprite
+            
+        case .TeamRbaloon:
+            let newSprite = SKSpriteNode(imageNamed: "teamRbaloon")
+            newSprite.size = CGSize(width: 132, height: 192)
+            newSprite.position = CGPoint(x: xPosition, y: CGFloat(arc4random_uniform(2000) + 400))
+            
+            newSprite.physicsBody = SKPhysicsBody(texture: newSprite.texture!, size: newSprite.size)
+            newSprite.physicsBody?.isDynamic = false
+            newSprite.physicsBody?.usesPreciseCollisionDetection = true
+            newSprite.physicsBody?.categoryBitMask = Obstacle.teamRCategory
+
+            self.sprite = newSprite
+            
         case .Slowpoke:
             let newSprite = SKSpriteNode(imageNamed: "slowpokeImage")
             newSprite.size = CGSize(width: 60, height: 48)
             newSprite.position = CGPoint(x: xPosition, y: newSprite.size.height/2)
-            
-//            newSprite.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: newSprite.size.width,
-//                                                                      height: 5),
-//                                                  center: CGPoint(x: 0,
-//                                                                  y: -newSprite.size.height/2 + 3))
-//            newSprite.physicsBody?.isDynamic = false
-//            newSprite.physicsBody?.usesPreciseCollisionDetection = true
-//            newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
             
             let field = SKFieldNode.velocityField(withVector: vector_float3(5,5,0))
             field.position = newSprite.position
@@ -79,11 +99,6 @@ class Obstacle: CustomStringConvertible, Hashable {
             let newSprite = SKSpriteNode(texture: atlas.textureNamed("0"))
             newSprite.size = CGSize(width: 128, height: 136)
             newSprite.position = CGPoint(x: xPosition, y: CGFloat(arc4random_uniform(1000) + 300))
-            
-//            newSprite.physicsBody = SKPhysicsBody(texture: newSprite.texture!, size: newSprite.size)
-//            newSprite.physicsBody?.isDynamic = false
-//            newSprite.physicsBody?.usesPreciseCollisionDetection = true
-//            newSprite.physicsBody?.categoryBitMask = Obstacle.slowpokeCategory
             
             if let action = SKAction(named: "ArticunoAction") {
                 newSprite.run(action)
@@ -113,9 +128,5 @@ class Obstacle: CustomStringConvertible, Hashable {
             self.fieldNode = field
             self.sprite = newSprite
         }
-        
-        
     }
-    
-    
 }

@@ -110,6 +110,7 @@
                     </view>
                     <connections>
                         <outlet property="distanceLabel" destination="QyK-2h-kl6" id="tj6-4U-BpT"/>
+                        <outlet property="popupImage" destination="uIT-6q-2Hd" id="Eco-XA-TtL"/>
                         <outlet property="popupLabel" destination="hL6-rb-zEX" id="fxR-wu-7w8"/>
                         <outlet property="popupView" destination="5WE-lf-Yg4" id="ohR-Jy-mKE"/>
                     </connections>

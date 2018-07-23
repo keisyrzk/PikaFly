@@ -18,6 +18,7 @@
 		5B6A5E8120FF30D0004A48F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B6A5E7F20FF30D0004A48F5 /* Main.storyboard */; };
 		5B6A5E8320FF30D0004A48F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B6A5E8220FF30D0004A48F5 /* Assets.xcassets */; };
 		5B6A5E8620FF30D0004A48F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B6A5E8420FF30D0004A48F5 /* LaunchScreen.storyboard */; };
+		5B797D7121067565005C20E4 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B797D7021067565005C20E4 /* Pokemon.swift */; };
 		5BB9CF4F20FF59DD00EAF2B3 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB9CF4E20FF59DD00EAF2B3 /* Obstacle.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,6 +36,7 @@
 		5B6A5E8220FF30D0004A48F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5B6A5E8520FF30D0004A48F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5B6A5E8720FF30D0004A48F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B797D7021067565005C20E4 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		5BB9CF4E20FF59DD00EAF2B3 /* Obstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -105,6 +107,7 @@
 				5BB9CF4E20FF59DD00EAF2B3 /* Obstacle.swift */,
 				5B2981592101B66800265F8E /* Launcher.swift */,
 				5B29815C2101BE7400265F8E /* GameModel.swift */,
+				5B797D7021067565005C20E4 /* Pokemon.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B797D7121067565005C20E4 /* Pokemon.swift in Sources */,
 				5B29815A2101B66800265F8E /* Launcher.swift in Sources */,
 				5B6A5E7C20FF30D0004A48F5 /* GameScene.swift in Sources */,
 				5B6A5E7E20FF30D0004A48F5 /* GameViewController.swift in Sources */,

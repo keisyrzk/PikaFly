@@ -33,8 +33,16 @@ enum ObstacleType: Int {
 
 class Obstacle: CustomStringConvertible, Hashable {
     
-    static let pikachuCategory: UInt32 = 0x1 << 0
-    static let teamRCategory: UInt32 = 0x1 << 1
+    //the bit that represents the body
+    static let pikachuCategory: UInt32 = UInt32(2)
+    static let teamRCategory: UInt32 = UInt32(4)
+    
+    //the bit that represents which bodies collide with it
+    //if two object have the same collision mask than thay will collide - if collision masks would be different than such two objects will go through each other
+    //these values should be set as a power of "2" so: 1, 2, 4, 8, 16 etc.
+    //this is because the contactDelegate uses bitwise AND to compare
+    static let pikachuCollision: UInt32 = UInt32(1)
+    static let teamRCollision: UInt32 = UInt32(2)
     
     let obstacleType: ObstacleType
     var sprite: SKSpriteNode
@@ -79,7 +87,7 @@ class Obstacle: CustomStringConvertible, Hashable {
             newSprite.physicsBody?.isDynamic = false
             newSprite.physicsBody?.usesPreciseCollisionDetection = true
             newSprite.physicsBody?.categoryBitMask = Obstacle.teamRCategory
-
+            
             self.sprite = newSprite
             
         case .Slowpoke:

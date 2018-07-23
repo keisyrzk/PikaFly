@@ -17,7 +17,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         case Launched
     }
     
-    let pikachu = SKSpriteNode(imageNamed: "pikachuImage")
+    let worldNode = SKNode()
+    
+    let pikachu = SKSpriteNode(imageNamed: "pikachuDischarged")
+    var isPikachuCharged = false {
+        didSet {
+            pikachu.texture = isPikachuCharged ? SKTexture(image: #imageLiteral(resourceName: "pikachuCharged")) : SKTexture(image: #imageLiteral(resourceName: "pikachuDischarged"))
+        }
+    }
+    
     var pokeThrower = SKSpriteNode()
     var obstacles: [Obstacle] = []
     var cam: SKCameraNode!
@@ -31,8 +39,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     let gameModel = GameModel()
     var sceneDelegate: SceneDelegate? = nil
     
+    var isAnimationLaunched = false
+    
     
     override func didMove(to view: SKView) {
+        
+        addChild(worldNode)
         
         setupCamera()
         setupPikachu()
@@ -52,14 +64,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             sceneDelegate?.pikachuDidStart()
             
             let launcher = Launcher.createLaucher(from: pokeThrower.position)
-            self.addChild(launcher)
+            worldNode.addChild(launcher)
             launcher.run(Launcher.getAngleAction())
             
             gameStartedState = .ChooseAngle
             
         case .ChooseAngle:
             
-            if let launcherNode = self.children.last {
+            if let launcherNode = worldNode.children.last {
                 gameModel.getAngle(from: launcherNode.zRotation)
                 gameModel.getDisplacement()
 
@@ -71,7 +83,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
         case .ChoosePower:
             
-            if let launcherNode = self.children.last {
+            if let launcherNode = worldNode.children.last {
                 
                 gameModel.getPower(nodeFrame: launcherNode.frame)
                 launcherNode.removeFromParent()
@@ -111,6 +123,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let pikachuDidStop = abs(Int32(pikachu.physicsBody!.velocity.dx)) < 5 && abs(Int32(pikachu.physicsBody!.velocity.dy)) < 5
         sceneDelegate?.distanceDidChange(distance: "\(distance > 0 ? distance : 0)m")
         
+        if pikachu.physicsBody!.velocity.dx > 2500 {
+            isPikachuCharged = true
+        }
+        
         if pikachuDidStop && distance > 0 {
             sceneDelegate?.pikachuDidStop(isTeamR: false)
         }
@@ -118,22 +134,50 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         
-        let secondNode = contact.bodyB.node as! SKSpriteNode
+//        let secondNode = contact.bodyB.node as! SKSpriteNode
         
         if (contact.bodyA.categoryBitMask == Obstacle.pikachuCategory) && (contact.bodyB.categoryBitMask == Obstacle.teamRCategory) {
             
-            let contactPoint = contact.contactPoint
-            let contact_y = contactPoint.y
-            let target_y = secondNode.position.y
-            let margin = secondNode.frame.size.height/2 - 25
-
-            self.isPaused = true
-            sceneDelegate?.pikachuDidStop(isTeamR: true)
+            //            let contactPoint = contact.contactPoint
+            //            let contact_y = contactPoint.y
+            //            let target_y = secondNode.position.y
+            //            let margin = secondNode.frame.size.height/2 - 25
+            
+            if isPikachuCharged {
+                if let node = contact.bodyB.node {
+                    isAnimationLaunched = true
+                    node.removeFromParent()
+                    self.isPikachuCharged = false
+                    worldNode.isPaused = true
+                    physicsWorld.speed = 0
+                    
+                    if let action = SKAction(named: "TeamRBlastOffAgain") {
+                        let atlas = SKTextureAtlas(named: "Sprites")
+                        let newSprite = SKSpriteNode(texture: atlas.textureNamed("0pikaThunder"))
+                        newSprite.size = CGSize(width: self.size.width + 100, height: self.size.height + 100)
+                        newSprite.position = pikachu.position
+                        self.addChild(newSprite)
+                        newSprite.run(action) {
+                            newSprite.removeFromParent()
+                            self.worldNode.isPaused = false
+                            self.physicsWorld.speed = 1
+                            self.isAnimationLaunched = false
+                            self.pikachu.physicsBody?.applyImpulse(CGVector(dx: self.gameModel.dx * self.gameModel.power,
+                                                                            dy: self.gameModel.dy * self.gameModel.power))
+                        }
+                    }
+                }
+            }
+            else if isAnimationLaunched == false {
+                worldNode.isPaused = true
+                physicsWorld.speed = 0
+                sceneDelegate?.pikachuDidStop(isTeamR: true)
+            }
         }
     }
     
     private func setupPikachu() {
-        
+                
         pikachu.isHidden = true
         pikachu.size = CGSize(width: 50, height: 70)
         pikachu.zRotation = gameModel.getRadians(from: 30)
@@ -142,9 +186,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pikachu.physicsBody = SKPhysicsBody(texture: pikachu.texture!, size: pikachu.size)
         pikachu.physicsBody?.restitution = 0.6
         pikachu.physicsBody?.categoryBitMask = Obstacle.pikachuCategory
-        pikachu.physicsBody?.contactTestBitMask = Obstacle.pikachuCategory | Obstacle.teamRCategory
+        pikachu.physicsBody?.contactTestBitMask = Obstacle.teamRCategory    //a mask that defines which categories of bodies cause intersection notifications with this physics body; this tuns "func didBegin(_ contact: SKPhysicsContact)"
         
-        self.addChild(pikachu)
+        worldNode.addChild(pikachu)
     }
     
     private func setupPokeThrower() {
@@ -158,7 +202,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             pokeThrower.run(pokeThrow_start)
         }
         
-        self.addChild(pokeThrower)
+        worldNode.addChild(pokeThrower)
     }
 
     private func setupPhysics() {
@@ -174,7 +218,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cam = SKCameraNode()    //initialize and assign an instance of SKCameraNode to the cam variable.
         
         self.camera = cam       //set the scene's camera to reference cam
-        self.addChild(cam)
+        worldNode.addChild(cam)
         
         resetCameraPosition()
     }
@@ -188,7 +232,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func generateObstacles() {
         
         //team R
-        for xPos in stride(from: 600, to: sceneWidth, by: 3200) {
+        for xPos in stride(from: 800, to: sceneWidth, by: 3200) {
             let obstacle = Obstacle(obstacleType: .TeamR, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
@@ -212,7 +256,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         // charizard
-        for xPos in stride(from: 450, to: sceneWidth, by: 4000) {
+        for xPos in stride(from: 800, to: sceneWidth, by: 4000) {
             let obstacle = Obstacle(obstacleType: .Charizard, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
@@ -223,9 +267,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func addObstaclesToScene() {
         
         obstacles.forEach { (obstacle) in
-            self.addChild(obstacle.sprite)
+            worldNode.addChild(obstacle.sprite)
             if let field = obstacle.fieldNode {
-                self.addChild(field)
+                worldNode.addChild(field)
             }
         }
     }

@@ -88,7 +88,6 @@ class GameViewController: UIViewController, SceneDelegate {
     
     @IBAction func pokedexAction(_ sender: Any) {
         let pokedexVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "pokedexVC") as! PokedexViewController
-        pokedexVC.assignDependencies(pokemons: pokedex)
         self.present(pokedexVC, animated: true, completion: nil)
     }
     

@@ -57,7 +57,7 @@ class Pokemon: CustomStringConvertible, Hashable {
                                           "gengar":.Ghost,
                                           "hunter":.Ghost,
                                           "jolteon":.Electric,
-                                          "hitmanchan":.Fighting,
+                                          "hitmonchan":.Fighting,
                                           "hitmonlee":.Fighting,
                                           "phanphy":.Normal,
                                           "snorlax":.Normal,
@@ -142,6 +142,8 @@ class Pokemon: CustomStringConvertible, Hashable {
         setSize(for: newSprite)
         newSprite.physicsBody = SKPhysicsBody(texture: newSprite.texture!, size: newSprite.size)
         newSprite.physicsBody?.isDynamic = false
+        newSprite.physicsBody?.categoryBitMask = Bits.pokemonCategory
+        newSprite.physicsBody?.collisionBitMask = Bits.pokemonCollision
         
         if self.name == "articuno" || self.name == "charizard" {
             if let action = SKAction(named: "\(self.name)".capitalizeFirstLetter() + "Action") {

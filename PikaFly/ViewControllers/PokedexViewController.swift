@@ -12,17 +12,10 @@ class PokedexViewController: UIViewController {
 
     @IBOutlet weak var pokedexCollection: PokedexCollectionView!
     
-    var pokemons: [Pokemon] = []
-    
-    func assignDependencies(pokemons: [Pokemon]) {
-        
-        self.pokemons = pokemons
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        pokedexCollection.inputDataSource = pokemons
+        pokedexCollection.inputDataSource = Array(Pokedex.shared.pokemons)
     }
 
     @IBAction func closeAction(_ sender: Any) {

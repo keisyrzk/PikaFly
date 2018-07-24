@@ -8,8 +8,6 @@ protocol SceneDelegate {
     func pikachuDidStop(isTeamR: Bool)
 }
 
-var pokedex: [Pokemon] = []
-
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     enum GameStartState {
@@ -177,7 +175,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else {
             if let name = secondNode.name {
                 if let pokemon = (pokemons.filter{ $0.name == name }).first {
-                    pokedex.append(pokemon)
+                    if (Pokedex.shared.pokemons.filter{ $0.name == name }).count == 0 {
+                        Pokedex.shared.pokemons.append(pokemon)
+                    }
                 }
             }
         }
@@ -193,7 +193,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pikachu.physicsBody = SKPhysicsBody(texture: pikachu.texture!, size: pikachu.size)
         pikachu.physicsBody?.restitution = 0.6
         pikachu.physicsBody?.categoryBitMask = Bits.pikachuCategory
-        pikachu.physicsBody?.contactTestBitMask = Bits.teamRCategory    //a mask that defines which categories of bodies cause intersection notifications with this physics body; this tuns "func didBegin(_ contact: SKPhysicsContact)"
+        pikachu.physicsBody?.contactTestBitMask = Bits.teamRCategory | Bits.pokemonCategory    //a mask that defines which categories of bodies cause intersection notifications with this physics body; this tuns "func didBegin(_ contact: SKPhysicsContact)"
+        pikachu.physicsBody?.collisionBitMask = Bits.pikachuCollision
         
         worldNode.addChild(pikachu)
     }

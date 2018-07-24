@@ -20,6 +20,7 @@
 		5B6A5E8620FF30D0004A48F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B6A5E8420FF30D0004A48F5 /* LaunchScreen.storyboard */; };
 		5B797D7121067565005C20E4 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B797D7021067565005C20E4 /* Pokemon.swift */; };
 		5BB9CF4F20FF59DD00EAF2B3 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB9CF4E20FF59DD00EAF2B3 /* Obstacle.swift */; };
+		5BE9342C2107008500F225FF /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9342B2107008500F225FF /* String+extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		5B6A5E8720FF30D0004A48F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B797D7021067565005C20E4 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		5BB9CF4E20FF59DD00EAF2B3 /* Obstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
+		5BE9342B2107008500F225FF /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +83,7 @@
 				5B6A5E8420FF30D0004A48F5 /* LaunchScreen.storyboard */,
 				5B6A5E8720FF30D0004A48F5 /* Info.plist */,
 				5B6A5E7520FF30D0004A48F5 /* AppDelegate.swift */,
+				5BE9342A2107007200F225FF /* Extensions */,
 				5BB9CF4D20FF59AE00EAF2B3 /* Models */,
 				5B6A5E8D20FF395F004A48F5 /* GameScene */,
 				5B6A5E7D20FF30D0004A48F5 /* GameViewController.swift */,
@@ -110,6 +113,14 @@
 				5B797D7021067565005C20E4 /* Pokemon.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		5BE9342A2107007200F225FF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5BE9342B2107008500F225FF /* String+extension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -186,6 +197,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5BE9342C2107008500F225FF /* String+extension.swift in Sources */,
 				5B797D7121067565005C20E4 /* Pokemon.swift in Sources */,
 				5B29815A2101B66800265F8E /* Launcher.swift in Sources */,
 				5B6A5E7C20FF30D0004A48F5 /* GameScene.swift in Sources */,

@@ -27,6 +27,11 @@ class Pokemon {
         case Normal
     }
     
+    private let minWidth: UInt32 = 30
+    private let maxWidth: UInt32 = 200
+    
+    private let gameModel = GameModel()
+    
     var name: String
     var type: PokemonType
     var image: UIImage?
@@ -41,27 +46,162 @@ class Pokemon {
             self.image = _image
         }
         
-        createSprite()
+        createSprite(type: type)
     }
     
-    private func createSprite() {
+    private func setSize(for sprite: SKSpriteNode) {
         
-        let xPosition = CGFloat(100)
+        let width = sprite.size.width
+        let height = sprite.size.height
+        let aspectRatio = height/width
         
-        let newSprite = SKSpriteNode(imageNamed: "slowpokeImage")
-        newSprite.size = CGSize(width: 60, height: 48)
-        newSprite.position = CGPoint(x: xPosition, y: newSprite.size.height/2)
+        let newWidth = arc4random_uniform(maxWidth) + minWidth
+        let newHeight = aspectRatio * CGFloat(newWidth)
+        
+        sprite.size = CGSize(width: CGFloat(newWidth),
+                             height: newHeight)
+    }
+    
+    private func getRandomInRange(from: Int, to: Int) -> CGFloat {
+        
+        return CGFloat(arc4random_uniform(UInt32(from)) + UInt32(to))
+    }
+    
+    private func createSprite(type: PokemonType) {
+        
+        let atlas = SKTextureAtlas(named: "Sprites")
+        let newSprite = SKSpriteNode(texture: atlas.textureNamed("0\(self.name)"))
+        setSize(for: newSprite)
+        if let action = SKAction(named: "\(self.name)".capitalizeFirstLetter() + "Action") {
+            newSprite.run(action)
+        }
+        
+        
+        switch type {
+            
+        case .Psychic:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.radialGravityField()
+            field.strength = 3
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Toxic:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.dragField()
+            field.strength = 3
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Water:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.velocityField(withVector: vector_float3(5,5,0))
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Grass:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.velocityField(withVector: vector_float3(2,-3,0))
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Flying:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.velocityField(withVector: vector_float3(8,1,0))
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Fire:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.dragField()
+            field.strength = 5
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Bug:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.velocityField(withVector: vector_float3(1,-2,0))
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Ground:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.linearGravityField(withVector: vector_float3(0,-9.8,0))
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Dragon:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.velocityField(withVector: vector_float3(1,5,0))
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Ghost:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.vortexField()
+            field.direction = vector_float3(-5, 0, 0)
+            field.strength = 5
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Fighting:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.velocityField(withVector: vector_float3(5,-3,0))
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Electric:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.dragField()
+            field.strength = 3
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Ice:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.velocityField(withVector: vector_float3(5,-5,0))
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+            
+        case .Normal:
+            newSprite.position = CGPoint(x: getRandomInRange(from: gameModel.sceneWidth, to: 500),
+                                         y: newSprite.size.height/2)
+            let field = SKFieldNode.velocityField(withVector: vector_float3(2,2,0))
+            field.position = newSprite.position
+            field.region = SKRegion(size: newSprite.size)
+            self.fieldNode = field
+        }
         
         self.sprite = newSprite
-        
-        let field = SKFieldNode.velocityField(withVector: vector_float3(5,5,0))
-        field.position = newSprite.position
-        field.region = SKRegion(size: newSprite.size)
-        
-        self.fieldNode = field
     }
     
-    static func generatePokemons() -> [Pokemon] {
+    static func generatePokemons(gameModel: GameModel) -> [Pokemon] {
         
         var pokemons: [Pokemon] = []
         
@@ -120,6 +260,8 @@ class Pokemon {
         pokemons.append(Pokemon(name: "weezing", type: .Flying))
         pokemons.append(Pokemon(name: "zapdos", type: .Flying))
         pokemons.append(Pokemon(name: "zubat", type: .Flying))
+        pokemons.append(Pokemon(name: "articuno", type: .Flying))
+        pokemons.append(Pokemon(name: "charizard", type: .Fire))
         
         return pokemons
     }

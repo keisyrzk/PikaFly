@@ -11,6 +11,10 @@ import SpriteKit
 class GameModel {
     
     var scene: GameScene!
+    
+    let sceneWidth = 50000
+    let sceneHeight = 5000
+    let pikachuPosition = 200
 
     var launchAngel: CGFloat = 0
     var dx: CGFloat = 0

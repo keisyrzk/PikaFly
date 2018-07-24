@@ -30,10 +30,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var obstacles: [Obstacle] = []
     var cam: SKCameraNode!
     
-    let sceneWidth = 50000
-    let sceneHeight = 5000
-    let pikachuPosition = 200
-    
     var gameStartedState: GameStartState = .Started
     
     let gameModel = GameModel()
@@ -119,7 +115,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         
-        let distance = Int(pikachu.position.x) - Int(pikachuPosition)
+        let distance = Int(pikachu.position.x) - Int(gameModel.pikachuPosition)
         let pikachuDidStop = abs(Int32(pikachu.physicsBody!.velocity.dx)) < 5 && abs(Int32(pikachu.physicsBody!.velocity.dy)) < 5
         sceneDelegate?.distanceDidChange(distance: "\(distance > 0 ? distance : 0)m")
         
@@ -181,7 +177,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pikachu.isHidden = true
         pikachu.size = CGSize(width: 50, height: 70)
         pikachu.zRotation = gameModel.getRadians(from: 30)
-        pikachu.position = CGPoint(x: pikachuPosition, y: 100)
+        pikachu.position = CGPoint(x: gameModel.pikachuPosition, y: 100)
         
         pikachu.physicsBody = SKPhysicsBody(texture: pikachu.texture!, size: pikachu.size)
         pikachu.physicsBody?.restitution = 0.6
@@ -208,7 +204,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func setupPhysics() {
         
         physicsWorld.gravity = CGVector(dx:0, dy: 0)
-        physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: sceneWidth, height: sceneHeight))
+        physicsBody = SKPhysicsBody(edgeLoopFrom: CGRect(x: 0, y: 0, width: gameModel.sceneWidth, height: gameModel.sceneHeight))
         
         physicsWorld.contactDelegate = self
     }
@@ -232,31 +228,31 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func generateObstacles() {
         
         //team R
-        for xPos in stride(from: 800, to: sceneWidth, by: 3200) {
+        for xPos in stride(from: 800, to: gameModel.sceneWidth, by: 3200) {
             let obstacle = Obstacle(obstacleType: .TeamR, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
         
         //team R baloon
-        for xPos in stride(from: 500, to: sceneWidth, by: 3200) {
+        for xPos in stride(from: 500, to: gameModel.sceneWidth, by: 3200) {
             let obstacle = Obstacle(obstacleType: .TeamRbaloon, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
         
         // slowpoke
-        for xPos in stride(from: 600, to: sceneWidth, by: 1500) {
+        for xPos in stride(from: 600, to: gameModel.sceneWidth, by: 1500) {
             let obstacle = Obstacle(obstacleType: .Slowpoke, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
         
         // articuno
-        for xPos in stride(from: 200, to: sceneWidth, by: 2500) {
+        for xPos in stride(from: 200, to: gameModel.sceneWidth, by: 2500) {
             let obstacle = Obstacle(obstacleType: .Articuno, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
         
         // charizard
-        for xPos in stride(from: 800, to: sceneWidth, by: 4000) {
+        for xPos in stride(from: 800, to: gameModel.sceneWidth, by: 4000) {
             let obstacle = Obstacle(obstacleType: .Charizard, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }

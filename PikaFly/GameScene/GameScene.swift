@@ -239,13 +239,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func generateObstacles() {
         
         //team R
-        for xPos in stride(from: 800, to: gameModel.sceneWidth, by: 3200) {
+        for _ in 0 ..< 2 {
+            let xPos = gameModel.getRandomInRange(from: 2000, to: gameModel.sceneWidth)
             let obstacle = Obstacle(obstacleType: .TeamR, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
         
         //team R baloon
-        for xPos in stride(from: 500, to: gameModel.sceneWidth, by: 3200) {
+        for _ in 0 ..< 2 {
+            let xPos = gameModel.getRandomInRange(from: 2500, to: gameModel.sceneWidth)
             let obstacle = Obstacle(obstacleType: .TeamRbaloon, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }

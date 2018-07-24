@@ -99,7 +99,7 @@ class Pokemon: CustomStringConvertible, Hashable {
     }
     
     private let minWidth: UInt32 = 50
-    private let maxWidth: UInt32 = 100
+    private let maxWidth: UInt32 = 80
     
     private let gameModel = GameModel()
     
@@ -113,133 +113,11 @@ class Pokemon: CustomStringConvertible, Hashable {
     init(name: String, type: PokemonType) {
         self.name = name
         self.type = type
-//        if let _image = UIImage(named: name) {
-//            self.image = _image
-//        }
+        if let _image = UIImage(named: name) {
+            self.image = _image
+        }
         
         createSprite(type: type)
-        
-//
-//        let atlas = SKTextureAtlas(named: "Sprites")
-//        let newSprite = SKSpriteNode(texture: atlas.textureNamed("0\(name)"))
-//        newSprite.size = CGSize(width: 50, height: 100)
-//
-//        switch type {
-//
-//        case .Psychic:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(-2,0,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Toxic:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(-2,0,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Water:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(2,10,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Grass:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(2,-3,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Flying:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: 200)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(8,1,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Fire:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(-2,0,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Bug:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(1,-2,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Ground:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(0,-2,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Dragon:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(1,8,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Ghost:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(-4,-2,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Fighting:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(5,-3,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Electric:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(-2,0,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Ice:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(5,-5,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//
-//        case .Normal:
-//            newSprite.position = CGPoint(x: xPosition,
-//                                         y: newSprite.size.height/2)
-//            let field = SKFieldNode.velocityField(withVector: vector_float3(2,2,0))
-//            field.position = newSprite.position
-//            field.region = SKRegion(size: newSprite.size)
-//            self.fieldNode = field
-//        }
-//
-//        self.sprite = newSprite
     }
     
     private func setSize(for sprite: SKSpriteNode) {
@@ -396,7 +274,15 @@ class Pokemon: CustomStringConvertible, Hashable {
             let keys = Array(pokeDict.keys)
             
             for _ in 0 ..< pokeAmount {
-                pokes.append(Pokemon(name: keys[pokemonIndex], type: pokeDict[keys[pokemonIndex]]!))
+                let newPokemon = Pokemon(name: keys[pokemonIndex], type: pokeDict[keys[pokemonIndex]]!)
+                
+                //check if there is a free space to place new pokemon in range
+                //  xPos - 100      pokemon     xPos + 100
+                //       | ---------- () ----------- |
+                let filtered = pokes.filter{ $0.sprite.position.x > newPokemon.sprite.position.x - 100 && $0.sprite.position.x < newPokemon.sprite.position.x + 100 }
+                if filtered.count == 0 {
+                    pokes.append(newPokemon)
+                }
             }
         }
 

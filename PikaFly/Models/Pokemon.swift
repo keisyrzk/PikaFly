@@ -15,7 +15,7 @@ class Pokemon: CustomStringConvertible, Hashable {
     }
     
     var description: String {
-        return "type:\(type)"
+        return "name: \(name), type:\(type), image: \(String(describing: image))"
     }
     
     static func ==(lhs: Pokemon, rhs: Pokemon) -> Bool {
@@ -113,10 +113,11 @@ class Pokemon: CustomStringConvertible, Hashable {
     init(name: String, type: PokemonType) {
         self.name = name
         self.type = type
-        if let _image = UIImage(named: name) {
-            self.image = _image
-        }
         
+        let atlas = SKTextureAtlas(named: "Sprites")
+        let texture = atlas.textureNamed("0\(self.name)")
+        self.image = UIImage(cgImage: texture.cgImage())
+
         createSprite(type: type)
     }
     
@@ -137,8 +138,11 @@ class Pokemon: CustomStringConvertible, Hashable {
         
         let atlas = SKTextureAtlas(named: "Sprites")
         let newSprite = SKSpriteNode(texture: atlas.textureNamed("0\(self.name)"))
+        newSprite.name = self.name
         setSize(for: newSprite)
-
+        newSprite.physicsBody = SKPhysicsBody(texture: newSprite.texture!, size: newSprite.size)
+        newSprite.physicsBody?.isDynamic = false
+        
         if self.name == "articuno" || self.name == "charizard" {
             if let action = SKAction(named: "\(self.name)".capitalizeFirstLetter() + "Action") {
                 newSprite.run(action)

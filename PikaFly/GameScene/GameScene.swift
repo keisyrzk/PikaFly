@@ -51,15 +51,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         generatePokemons()
     }
     
-    func generatePokemons() {
-        pokemons = Pokemon.generatePokemons(gameModel: gameModel)
-
-        pokemons.forEach { (poke) in
-            worldNode.addChild(poke.sprite)
-            worldNode.addChild(poke.fieldNode)
-        }
-    }
-    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
         switch gameStartedState {
@@ -141,9 +132,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
         
-//        let secondNode = contact.bodyB.node as! SKSpriteNode
+        let secondNode = contact.bodyB.node as! SKSpriteNode
         
-        if (contact.bodyA.categoryBitMask == Obstacle.pikachuCategory) && (contact.bodyB.categoryBitMask == Obstacle.teamRCategory) {
+        if (contact.bodyA.categoryBitMask == Bits.pikachuCategory) && (contact.bodyB.categoryBitMask == Bits.teamRCategory) {
             
             //            let contactPoint = contact.contactPoint
             //            let contact_y = contactPoint.y
@@ -181,6 +172,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 sceneDelegate?.pikachuDidStop(isTeamR: true)
             }
         }
+        else {
+            if let name = secondNode.name {
+                let pokemon = pokemons.filter{ $0.name == name }.first
+                print(pokemon?.description)
+            }
+        }
     }
     
     private func setupPikachu() {
@@ -192,8 +189,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         pikachu.physicsBody = SKPhysicsBody(texture: pikachu.texture!, size: pikachu.size)
         pikachu.physicsBody?.restitution = 0.6
-        pikachu.physicsBody?.categoryBitMask = Obstacle.pikachuCategory
-        pikachu.physicsBody?.contactTestBitMask = Obstacle.teamRCategory    //a mask that defines which categories of bodies cause intersection notifications with this physics body; this tuns "func didBegin(_ contact: SKPhysicsContact)"
+        pikachu.physicsBody?.categoryBitMask = Bits.pikachuCategory
+        pikachu.physicsBody?.contactTestBitMask = Bits.teamRCategory    //a mask that defines which categories of bodies cause intersection notifications with this physics body; this tuns "func didBegin(_ contact: SKPhysicsContact)"
         
         worldNode.addChild(pikachu)
     }
@@ -262,6 +259,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if let field = obstacle.fieldNode {
                 worldNode.addChild(field)
             }
+        }
+    }
+    
+    func generatePokemons() {
+        pokemons = Pokemon.generatePokemons(gameModel: gameModel)
+        
+        pokemons.forEach { (poke) in
+            worldNode.addChild(poke.sprite)
+            worldNode.addChild(poke.fieldNode)
         }
     }
 }

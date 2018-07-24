@@ -8,6 +8,8 @@ protocol SceneDelegate {
     func pikachuDidStop(isTeamR: Bool)
 }
 
+var pokedex: [Pokemon] = []
+
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     enum GameStartState {
@@ -174,8 +176,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         else {
             if let name = secondNode.name {
-                let pokemon = pokemons.filter{ $0.name == name }.first
-                print(pokemon?.description)
+                if let pokemon = (pokemons.filter{ $0.name == name }).first {
+                    pokedex.append(pokemon)
+                }
             }
         }
     }

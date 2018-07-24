@@ -41,4 +41,9 @@ class GameModel {
         dx = 1
         dy = 1 / arcusTan
     }
+    
+    func getRandomInRange(from: Int, to: Int) -> CGFloat {
+        
+        return CGFloat(arc4random_uniform(UInt32(to)) + UInt32(from))
+    }
 }

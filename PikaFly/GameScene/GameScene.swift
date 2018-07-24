@@ -28,6 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var pokeThrower = SKSpriteNode()
     var obstacles: [Obstacle] = []
+    var pokemons: [Pokemon] = []
     var cam: SKCameraNode!
     
     var gameStartedState: GameStartState = .Started
@@ -44,9 +45,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         setupCamera()
         setupPikachu()
-        
         setupPhysics()
+        
         generateObstacles()
+        generatePokemons()
+    }
+    
+    func generatePokemons() {
+        pokemons = Pokemon.generatePokemons(gameModel: gameModel)
+
+        pokemons.forEach { (poke) in
+            worldNode.addChild(poke.sprite)
+            worldNode.addChild(poke.fieldNode)
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -238,25 +249,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let obstacle = Obstacle(obstacleType: .TeamRbaloon, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)
         }
-        
-        // slowpoke
-        for xPos in stride(from: 600, to: gameModel.sceneWidth, by: 1500) {
-            let obstacle = Obstacle(obstacleType: .Slowpoke, xPosition: CGFloat(xPos))
-            obstacles.append(obstacle)
-        }
-        
-        // articuno
-        for xPos in stride(from: 200, to: gameModel.sceneWidth, by: 2500) {
-            let obstacle = Obstacle(obstacleType: .Articuno, xPosition: CGFloat(xPos))
-            obstacles.append(obstacle)
-        }
-        
-        // charizard
-        for xPos in stride(from: 800, to: gameModel.sceneWidth, by: 4000) {
-            let obstacle = Obstacle(obstacleType: .Charizard, xPosition: CGFloat(xPos))
-            obstacles.append(obstacle)
-        }
-        
+
         addObstaclesToScene()
     }
     

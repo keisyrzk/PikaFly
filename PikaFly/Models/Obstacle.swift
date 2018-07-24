@@ -11,17 +11,11 @@ import SpriteKit
 enum ObstacleType: Int {
     case TeamR
     case TeamRbaloon
-    case Slowpoke
-    case Articuno
-    case Charizard
     
     var spriteName: String {
         let spriteNames = [
             "teamR",
-            "teamRbaloon",
-            "slowpoke",
-            "articuno",
-            "charizard"]
+            "teamRbaloon"]
         
         return spriteNames[rawValue]
     }
@@ -89,52 +83,7 @@ class Obstacle: CustomStringConvertible, Hashable {
             newSprite.physicsBody?.categoryBitMask = Obstacle.teamRCategory
             
             self.sprite = newSprite
-            
-        case .Slowpoke:
-            let newSprite = SKSpriteNode(imageNamed: "slowpokeImage")
-            newSprite.size = CGSize(width: 60, height: 48)
-            newSprite.position = CGPoint(x: xPosition, y: newSprite.size.height/2)
-            
-            let field = SKFieldNode.velocityField(withVector: vector_float3(5,5,0))
-            field.position = newSprite.position
-            field.region = SKRegion(size: newSprite.size)
-            
-            self.fieldNode = field
-            self.sprite = newSprite
-            
-        case .Articuno:
-            let atlas = SKTextureAtlas(named: "Sprites")
-            let newSprite = SKSpriteNode(texture: atlas.textureNamed("0"))
-            newSprite.size = CGSize(width: 128, height: 136)
-            newSprite.position = CGPoint(x: xPosition, y: CGFloat(arc4random_uniform(1000) + 300))
-            
-            if let action = SKAction(named: "ArticunoAction") {
-                newSprite.run(action)
-            }
-            
-            let field = SKFieldNode.velocityField(withVector: vector_float3(10,1,0))
-            field.position = newSprite.position
-            field.region = SKRegion(size: newSprite.size)
-            
-            self.fieldNode = field
-            self.sprite = newSprite
-            
-        case .Charizard:
-            let atlas = SKTextureAtlas(named: "Sprites")
-            let newSprite = SKSpriteNode(texture: atlas.textureNamed("0charizard"))
-            newSprite.size = CGSize(width: 190, height: 104)
-            newSprite.position = CGPoint(x: xPosition, y: newSprite.size.height/2)
-            
-            if let action = SKAction(named: "CharizardAction") {
-                newSprite.run(action)
-            }
-            
-            let field = SKFieldNode.velocityField(withVector: vector_float3(20,2,0))
-            field.position = newSprite.position
-            field.region = SKRegion(size: newSprite.size)
-            
-            self.fieldNode = field
-            self.sprite = newSprite
+
         }
     }
 }

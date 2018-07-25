@@ -187,7 +187,7 @@ class Pokemon: CustomStringConvertible, Hashable {
             
         case .Flying:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth - 20000),
-                                         y: gameModel.getRandomInRange(from: Int(newSprite.size.height/2) + 100, to: 2000))
+                                         y: gameModel.getRandomInRange(from: Int(newSprite.size.height/2) + 100, to: 1000))
             let field = SKFieldNode.velocityField(withVector: vector_float3(10,1,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)

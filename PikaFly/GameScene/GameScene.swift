@@ -121,7 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let pikachuDidStop = abs(Int32(pikachu.physicsBody!.velocity.dx)) < 5 && abs(Int32(pikachu.physicsBody!.velocity.dy)) < 5
         sceneDelegate?.distanceDidChange(distance: "\(distance > 0 ? distance : 0)m")
         
-        if pikachu.physicsBody!.velocity.dx > 2500 {
+        if pikachu.physicsBody!.velocity.dx > 2000 {
             isPikachuCharged = true
         }
         

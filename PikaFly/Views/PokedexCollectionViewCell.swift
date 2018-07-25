@@ -16,8 +16,16 @@ class PokedexCollectionViewCell: UICollectionViewCell {
     func config(pokemon: Pokemon, myPokes: [Pokemon]) {
         
         
+        myPokes.forEach { (poke) in
+            print("MY_POKE:   \(poke.name)")
+        }
+        print("now:   \(pokemon.name)")
+        
         if let _image = pokemon.image {
-            if myPokes.contains(pokemon) {
+            
+            let myPokemons = myPokes.filter{ $0.name == pokemon.name }
+            
+            if myPokemons.count > 0 {
                 pokemonImageView.image = _image
             }
             else {

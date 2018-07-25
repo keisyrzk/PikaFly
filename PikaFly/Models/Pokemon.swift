@@ -156,7 +156,7 @@ class Pokemon: CustomStringConvertible, Hashable {
         case .Psychic:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth),
                                          y: newSprite.size.height/2)
-            let field = SKFieldNode.velocityField(withVector: vector_float3(4,4,0))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(5,15,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)
             self.fieldNode = field
@@ -180,7 +180,7 @@ class Pokemon: CustomStringConvertible, Hashable {
         case .Grass:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth - 15000),
                                          y: newSprite.size.height/2)
-            let field = SKFieldNode.velocityField(withVector: vector_float3(3,4,0))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(10,2,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)
             self.fieldNode = field
@@ -188,7 +188,7 @@ class Pokemon: CustomStringConvertible, Hashable {
         case .Flying:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth - 20000),
                                          y: gameModel.getRandomInRange(from: Int(newSprite.size.height/2) + 100, to: 2000))
-            let field = SKFieldNode.velocityField(withVector: vector_float3(8,1,0))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(10,1,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)
             self.fieldNode = field
@@ -196,7 +196,7 @@ class Pokemon: CustomStringConvertible, Hashable {
         case .Fire:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth - 25000),
                                          y: newSprite.size.height/2)
-            let field = SKFieldNode.velocityField(withVector: vector_float3(5,1,0))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(8,2,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)
             self.fieldNode = field
@@ -204,7 +204,7 @@ class Pokemon: CustomStringConvertible, Hashable {
         case .Bug:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth - 30000),
                                          y: newSprite.size.height/2)
-            let field = SKFieldNode.velocityField(withVector: vector_float3(1,5,0))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(2,8,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)
             self.fieldNode = field
@@ -212,7 +212,7 @@ class Pokemon: CustomStringConvertible, Hashable {
         case .Ground:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth - 35000),
                                          y: newSprite.size.height/2)
-            let field = SKFieldNode.velocityField(withVector: vector_float3(1,5,0))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(2,8,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)
             self.fieldNode = field
@@ -220,7 +220,7 @@ class Pokemon: CustomStringConvertible, Hashable {
         case .Dragon:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth),
                                          y: newSprite.size.height/2)
-            let field = SKFieldNode.velocityField(withVector: vector_float3(1,8,0))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(2,30,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)
             self.fieldNode = field
@@ -228,7 +228,7 @@ class Pokemon: CustomStringConvertible, Hashable {
         case .Ghost:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth - 40000),
                                          y: newSprite.size.height/2)
-            let field = SKFieldNode.velocityField(withVector: vector_float3(4,5,0))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(7,10,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)
             self.fieldNode = field
@@ -236,7 +236,7 @@ class Pokemon: CustomStringConvertible, Hashable {
         case .Fighting:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth - 30000),
                                          y: newSprite.size.height/2)
-            let field = SKFieldNode.velocityField(withVector: vector_float3(5,3,0))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(15,4,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)
             self.fieldNode = field
@@ -244,7 +244,7 @@ class Pokemon: CustomStringConvertible, Hashable {
         case .Electric:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth - 25000),
                                          y: newSprite.size.height/2)
-            let field = SKFieldNode.velocityField(withVector: vector_float3(5,1,0))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(7,4,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)
             self.fieldNode = field
@@ -260,7 +260,7 @@ class Pokemon: CustomStringConvertible, Hashable {
         case .Normal:
             newSprite.position = CGPoint(x: gameModel.getRandomInRange(from: 500, to: gameModel.sceneWidth - 15000),
                                          y: newSprite.size.height/2)
-            let field = SKFieldNode.velocityField(withVector: vector_float3(5,3,0))
+            let field = SKFieldNode.velocityField(withVector: vector_float3(7,5,0))
             field.position = newSprite.position
             field.region = SKRegion(size: newSprite.size)
             self.fieldNode = field

@@ -170,6 +170,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 worldNode.isPaused = true
                 physicsWorld.speed = 0
                 sceneDelegate?.pikachuDidStop(isTeamR: true)
+                Pokedex.shared.pokemons.removeAll()
             }
         }
         else {

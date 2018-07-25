@@ -206,9 +206,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pokeThrower.size = CGSize(width: 288, height: 160)
         pokeThrower.position = CGPoint(x: 100, y: pokeThrower.size.height/2)
         
-        if let pokeThrow_start = SKAction(named: "PokeThrow_startAction") {
-            pokeThrower.run(pokeThrow_start)
-        }
+//        if let pokeThrow_start = SKAction(named: "PokeThrow_startAction") {
+//            pokeThrower.run(pokeThrow_start)
+//        }
         
         worldNode.addChild(pokeThrower)
     }

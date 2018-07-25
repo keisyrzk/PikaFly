@@ -30,7 +30,7 @@ class GameViewController: UIViewController, SceneDelegate {
         
         let skView = view as! SKView
         skView.isMultipleTouchEnabled = false
-        skView.showsPhysics = true
+//        skView.showsPhysics = true
         
         if let _scene = SKScene(fileNamed: "GameScene") {
             scene = _scene as! GameScene

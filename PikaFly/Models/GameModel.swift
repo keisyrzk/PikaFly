@@ -35,11 +35,11 @@ class GameModel {
     
     func getDisplacement() {
         
-        // dx/dy = arcusTan
-        // dy = dx / arcusTan
-        let arcusTan = atan(launchAngel)
+        // dy/dx = tangensAlfa
+        // dy = dx * tangensAlfa
+        let tangens = tan(launchAngel)
         dx = 1
-        dy = 1 / arcusTan
+        dy = dx * tangens
     }
     
     func getRandomInRange(from: Int, to: Int) -> CGFloat {

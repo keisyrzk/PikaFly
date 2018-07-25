@@ -57,6 +57,9 @@ class GameViewController: UIViewController, SceneDelegate {
         popupView.isHidden = false
         popupLabel.text = isTeamR ? "PIKACHU BEEN CAUGHT BY TEAM R \nat \(String(describing: distanceLabel.text!))\nyou lose all pokemon" : "PIKACHU REACHED \(String(describing: distanceLabel.text!))"
         popupImage.image = isTeamR ? #imageLiteral(resourceName: "teamR") : #imageLiteral(resourceName: "pikachu")
+        if isTeamR {
+            Pokedex.shared.pokemons = []
+        }
     }
     
     override var shouldAutorotate: Bool {

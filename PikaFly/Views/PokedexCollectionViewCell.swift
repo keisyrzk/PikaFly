@@ -13,11 +13,19 @@ class PokedexCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var pokemonImageView: UIImageView!
     @IBOutlet weak var pokemonNameLabel: UILabel!
     
-    func config(name: String, image: UIImage?) {
-        if let _image = image {
-            pokemonImageView.image = _image
+    func config(pokemon: Pokemon, myPokes: [Pokemon]) {
+        
+        
+        if let _image = pokemon.image {
+            if myPokes.contains(pokemon) {
+                pokemonImageView.image = _image
+            }
+            else {
+                pokemonImageView.image = _image.withRenderingMode(.alwaysTemplate)
+                pokemonImageView.tintColor = UIColor.darkGray
+            }
         }
-        pokemonNameLabel.text = name
+        pokemonNameLabel.text = pokemon.name
     }
     
     override func prepareForReuse() {

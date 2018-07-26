@@ -152,9 +152,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     if let action = SKAction(named: "TeamRBlastOffAgain") {
                         let atlas = SKTextureAtlas(named: "Sprites")
                         let newSprite = SKSpriteNode(texture: atlas.textureNamed("0pikaThunder"))
-                        newSprite.size = CGSize(width: self.size.width + 100, height: self.size.height + 100)
-                        newSprite.position = pikachu.position
+                        newSprite.size = CGSize(width: self.size.width + 100, height: self.size.height)
+                        newSprite.position = CGPoint(x: self.frame.midX + 50,
+                                                     y: self.frame.midY)
+                        
                         self.addChild(newSprite)
+                        
                         newSprite.run(action) {
                             newSprite.removeFromParent()
                             self.worldNode.isPaused = false
@@ -185,7 +188,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     private func setupPikachu() {
-                
+        
         pikachu.isHidden = true
         pikachu.size = CGSize(width: 50, height: 70)
         pikachu.zRotation = gameModel.getRadians(from: 30)
@@ -207,9 +210,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pokeThrower.size = CGSize(width: 288, height: 160)
         pokeThrower.position = CGPoint(x: 100, y: pokeThrower.size.height/2)
         
-//        if let pokeThrow_start = SKAction(named: "PokeThrow_startAction") {
-//            pokeThrower.run(pokeThrow_start)
-//        }
+        if let pokeThrow_start = SKAction(named: "PokeThrow_startAction") {
+            pokeThrower.run(pokeThrow_start)
+        }
         
         worldNode.addChild(pokeThrower)
     }
@@ -241,7 +244,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private func generateObstacles() {
         
         //team R
-        for _ in 0 ..< 2 {
+        for _ in 0 ..< 1 {
             let xPos = gameModel.getRandomInRange(from: 2000, to: gameModel.sceneWidth)
             let obstacle = Obstacle(obstacleType: .TeamR, xPosition: CGFloat(xPos))
             obstacles.append(obstacle)

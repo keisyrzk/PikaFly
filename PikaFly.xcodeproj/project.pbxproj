@@ -20,6 +20,9 @@
 		5B6A5E8620FF30D0004A48F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5B6A5E8420FF30D0004A48F5 /* LaunchScreen.storyboard */; };
 		5B797D7121067565005C20E4 /* Pokemon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B797D7021067565005C20E4 /* Pokemon.swift */; };
 		5BB9CF4F20FF59DD00EAF2B3 /* Obstacle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BB9CF4E20FF59DD00EAF2B3 /* Obstacle.swift */; };
+		5BC84F82210AF25200352F06 /* ss1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BC84F7F210AF25200352F06 /* ss1.png */; };
+		5BC84F83210AF25200352F06 /* ss3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BC84F80210AF25200352F06 /* ss3.png */; };
+		5BC84F84210AF25200352F06 /* ss2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5BC84F81210AF25200352F06 /* ss2.png */; };
 		5BE9342C2107008500F225FF /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9342B2107008500F225FF /* String+extension.swift */; };
 		5BE9342E21073BED00F225FF /* Bits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE9342D21073BED00F225FF /* Bits.swift */; };
 		5BE93431210746DD00F225FF /* PokedexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BE93430210746DD00F225FF /* PokedexViewController.swift */; };
@@ -44,6 +47,9 @@
 		5B6A5E8720FF30D0004A48F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B797D7021067565005C20E4 /* Pokemon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pokemon.swift; sourceTree = "<group>"; };
 		5BB9CF4E20FF59DD00EAF2B3 /* Obstacle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Obstacle.swift; sourceTree = "<group>"; };
+		5BC84F7F210AF25200352F06 /* ss1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ss1.png; sourceTree = "<group>"; };
+		5BC84F80210AF25200352F06 /* ss3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ss3.png; sourceTree = "<group>"; };
+		5BC84F81210AF25200352F06 /* ss2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ss2.png; sourceTree = "<group>"; };
 		5BE9342B2107008500F225FF /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		5BE9342D21073BED00F225FF /* Bits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bits.swift; sourceTree = "<group>"; };
 		5BE93430210746DD00F225FF /* PokedexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokedexViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +80,7 @@
 		5B6A5E6920FF30D0004A48F5 = {
 			isa = PBXGroup;
 			children = (
+				5BC84F7E210AF23E00352F06 /* Screenshots */,
 				5B6A5E7420FF30D0004A48F5 /* PikaFly */,
 				5B6A5E7320FF30D0004A48F5 /* Products */,
 			);
@@ -125,6 +132,16 @@
 				5BE934372107563300F225FF /* Pokedex.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		5BC84F7E210AF23E00352F06 /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				5BC84F7F210AF25200352F06 /* ss1.png */,
+				5BC84F81210AF25200352F06 /* ss2.png */,
+				5BC84F80210AF25200352F06 /* ss3.png */,
+			);
+			path = Screenshots;
 			sourceTree = "<group>";
 		};
 		5BE9342A2107007200F225FF /* Extensions */ = {
@@ -215,9 +232,12 @@
 				5B6A5E8120FF30D0004A48F5 /* Main.storyboard in Resources */,
 				5B6A5E7820FF30D0004A48F5 /* GameScene.sks in Resources */,
 				5B6A5E8320FF30D0004A48F5 /* Assets.xcassets in Resources */,
+				5BC84F83210AF25200352F06 /* ss3.png in Resources */,
 				5B6A5E8620FF30D0004A48F5 /* LaunchScreen.storyboard in Resources */,
 				5B2C1C982100A04400BDD53B /* Sprites.atlas in Resources */,
+				5BC84F84210AF25200352F06 /* ss2.png in Resources */,
 				5B2C1C9621009FBA00BDD53B /* Actions.sks in Resources */,
+				5BC84F82210AF25200352F06 /* ss1.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
